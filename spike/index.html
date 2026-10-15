@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SimNavLog probe</title>
+    <style>
+      html,
+      body,
+      #probe {
+        margin: 0;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- The probe in an ordinary browser: the baseline the EFB's answers are
+       read against. Open from file:// or any static server. -->
+    <div id="probe"></div>
+    <script src="probe.js"></script>
+    <script>
+      SimNavLogProbe.run(document.getElementById("probe"), {
+        build: "browser",
+        fontBaseUrl: "efb/src/Assets/fonts",
+      });
+    </script>
+  </body>
+</html>
