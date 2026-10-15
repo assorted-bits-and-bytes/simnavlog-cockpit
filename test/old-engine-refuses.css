@@ -1,0 +1,23 @@
+/* Not shipped: the css gate's own test reads it, to prove it refuses each. */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.gap {
+  display: flex;
+  gap: 4px;
+}
+
+.has:has(.child) {
+  color: red;
+}
+
+:where(.zero) {
+  color: red;
+}
+
+.inset {
+  position: absolute;
+  inset: 0;
+}
