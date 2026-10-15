@@ -1,0 +1,3045 @@
+{
+  "fields": {
+    "altitude": {
+      "convention": "feet MSL",
+      "type": "number",
+      "unit": "foot"
+    },
+    "ata": {
+      "type": "string",
+      "unit": null
+    },
+    "climb": {
+      "convention": "gallons for the climb phase — the rate beside it is climb_gph",
+      "type": "number",
+      "unit": "gallon"
+    },
+    "climb_gph": {
+      "convention": "the plan's own climb rate, seeded from the aircraft profile's climb_gph and written by the pilot; every leg up to the TOC burns at it",
+      "type": "number",
+      "unit": "gallon_per_hour"
+    },
+    "compass_heading": {
+      "type": "number",
+      "unit": "degree"
+    },
+    "cruise": {
+      "convention": "gallons for the cruise phase — the rate beside it is cruise_gph",
+      "type": "number",
+      "unit": "gallon"
+    },
+    "cruise_gph": {
+      "convention": "the plan's own cruise rate, seeded from the aircraft profile's cruise_gph and written by the pilot; every leg after the TOC burns at it",
+      "type": "number",
+      "unit": "gallon_per_hour"
+    },
+    "dev": {
+      "convention": "added to magnetic; compass heading = magnetic heading + deviation",
+      "type": "number",
+      "unit": "degree"
+    },
+    "eta": {
+      "convention": "the cell's own text: elapsed time written like an ete (\"1h20\") when no departure time is set, a clock time (\"15:20Z\") when one is. See `elapsed_min` and `arrival` for the figures behind it",
+      "type": "string",
+      "unit": "minute"
+    },
+    "ete": {
+      "convention": "a duration as text: m:ss under an hour, held to ten seconds (\"4:40\"); HhMM from an hour (\"1h20\"). A colon is always minutes:seconds, and a bare number written to the API is minutes",
+      "type": "string",
+      "unit": "span"
+    },
+    "fuel_act": {
+      "type": "number",
+      "unit": "gallon"
+    },
+    "fuel_available": {
+      "type": "number",
+      "unit": "gallon"
+    },
+    "fuel_burn": {
+      "convention": "gallons burned on this leg, not a rate",
+      "type": "number",
+      "unit": "gallon"
+    },
+    "fuel_remaining": {
+      "type": "number",
+      "unit": "gallon"
+    },
+    "gs_act": {
+      "type": "number",
+      "unit": "knot"
+    },
+    "gs_est": {
+      "type": "number",
+      "unit": "knot"
+    },
+    "leg_dist": {
+      "type": "number",
+      "unit": "nautical_mile"
+    },
+    "mh": {
+      "type": "number",
+      "unit": "degree"
+    },
+    "oat": {
+      "type": "number",
+      "unit": "celsius"
+    },
+    "remaining_dist": {
+      "type": "number",
+      "unit": "nautical_mile"
+    },
+    "reserves": {
+      "type": "number",
+      "unit": "gallon"
+    },
+    "reserves_gph": {
+      "convention": "the rate the reserve is counted at — cruise_gph unless the pilot says otherwise",
+      "type": "number",
+      "unit": "gallon_per_hour"
+    },
+    "reserves_minutes": {
+      "convention": "minutes of reserve to hold back; 45 unless the whole flight lands in daylight",
+      "type": "number",
+      "unit": "minute"
+    },
+    "run_up_taxi_takeoff": {
+      "type": "number",
+      "unit": "gallon"
+    },
+    "tas": {
+      "type": "number",
+      "unit": "knot"
+    },
+    "tc": {
+      "type": "number",
+      "unit": "degree"
+    },
+    "th": {
+      "type": "number",
+      "unit": "degree"
+    },
+    "total": {
+      "type": "number",
+      "unit": "gallon"
+    },
+    "var": {
+      "convention": "positive is WEST; magnetic heading = true heading + variation. Note this is the opposite of the WMM/IGRF convention, which is positive east",
+      "type": "number",
+      "unit": "degree"
+    },
+    "wca": {
+      "convention": "positive turns right; true heading = true course + wca",
+      "type": "number",
+      "unit": "degree"
+    },
+    "wind_dir": {
+      "convention": "degrees TRUE, and the direction the wind blows FROM",
+      "type": "number",
+      "unit": "degree"
+    },
+    "wind_vel": {
+      "type": "number",
+      "unit": "knot"
+    }
+  },
+  "plan": {
+    "id": "00000000-0000-4000-8000-000000000011",
+    "label": null,
+    "origin": null,
+    "waypoints": [
+      {
+        "airport_info": {
+          "field_elevation": 165,
+          "runways": [
+            {
+              "he_heading": 230.7,
+              "ident": "06/24",
+              "le_heading": 50.7,
+              "length_ft": 5001,
+              "surface": "ASP",
+              "width_ft": 100
+            },
+            {
+              "he_heading": 230.8,
+              "ident": "07/25",
+              "le_heading": 50.8,
+              "length_ft": 1357,
+              "surface": "GRS",
+              "width_ft": 100
+            },
+            {
+              "he_heading": 319,
+              "ident": "15/33",
+              "le_heading": 139,
+              "length_ft": 2743,
+              "surface": "PEM",
+              "width_ft": 100
+            }
+          ],
+          "type": "medium_airport"
+        },
+        "climb_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "descent_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "frequencies": [
+          {
+            "label": "ASOS",
+            "value": "126.750"
+          },
+          {
+            "label": "ATIS",
+            "value": "126.750"
+          },
+          {
+            "label": "CLD",
+            "value": "121.800"
+          },
+          {
+            "label": "Center",
+            "value": "132.750"
+          },
+          {
+            "label": "CTAF",
+            "value": "124.000"
+          },
+          {
+            "label": "Ground",
+            "value": "121.800"
+          },
+          {
+            "label": "RDO",
+            "value": "122.200"
+          },
+          {
+            "label": "Tower",
+            "value": "124.000"
+          },
+          {
+            "label": "UNIC",
+            "value": "122.950"
+          }
+        ],
+        "ident": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": "KPOU"
+        },
+        "ident_stale": false,
+        "landmark_key": "landmark:geonames:5113144",
+        "lat": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": 41.6265983581543
+        },
+        "lon": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": -73.88420104980469
+        },
+        "name": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": "Dutchess County Airport"
+        },
+        "poi_key": "airport:ourairports:KPOU",
+        "suggested_name": "Colabaugh Pond",
+        "type": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": "airport"
+        }
+      },
+      {
+        "airport_info": null,
+        "climb_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "descent_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "frequencies": [],
+        "ident": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": ""
+        },
+        "ident_stale": false,
+        "landmark_key": "landmark:geonames:5107821",
+        "lat": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": 41.54243757019517
+        },
+        "lon": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": -73.98462755086793
+        },
+        "name": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": ""
+        },
+        "poi_key": null,
+        "suggested_name": "Balmville",
+        "type": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": "user"
+        }
+      },
+      {
+        "airport_info": null,
+        "climb_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "descent_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "frequencies": [],
+        "ident": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": ""
+        },
+        "ident_stale": false,
+        "landmark_key": "landmark:geonames:5117685",
+        "lat": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": 41.32053368359343
+        },
+        "lon": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": -73.98805223719067
+        },
+        "name": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": ""
+        },
+        "poi_key": null,
+        "suggested_name": "Fort Montgomery",
+        "type": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": "user"
+        }
+      },
+      {
+        "airport_info": null,
+        "climb_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "descent_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "frequencies": [],
+        "ident": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": ""
+        },
+        "ident_stale": false,
+        "landmark_key": "landmark:geonames:5142011",
+        "lat": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": 41.118973048348984
+        },
+        "lon": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": -73.90905631863498
+        },
+        "name": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": ""
+        },
+        "poi_key": null,
+        "suggested_name": "Upper Nyack",
+        "type": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": "user"
+        }
+      },
+      {
+        "airport_info": null,
+        "climb_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "descent_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "frequencies": [],
+        "ident": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": ""
+        },
+        "ident_stale": false,
+        "landmark_key": "landmark:geonames:5120197",
+        "lat": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": 40.99203405275978
+        },
+        "lon": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": -73.90287402935671
+        },
+        "name": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": ""
+        },
+        "poi_key": null,
+        "suggested_name": "Hastings-on-Hudson",
+        "type": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": "user"
+        }
+      },
+      {
+        "airport_info": null,
+        "climb_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "descent_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "frequencies": [],
+        "ident": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": ""
+        },
+        "ident_stale": false,
+        "landmark_key": "landmark:geonames:5098604",
+        "lat": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": 40.91569748304102
+        },
+        "lon": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": -73.92681444916943
+        },
+        "name": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": ""
+        },
+        "poi_key": null,
+        "suggested_name": "Green Brook Pond",
+        "type": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": "user"
+        }
+      },
+      {
+        "airport_info": null,
+        "climb_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "descent_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "frequencies": [],
+        "ident": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": ""
+        },
+        "ident_stale": false,
+        "landmark_key": "landmark:geonames:5098135",
+        "lat": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": 40.85229036179555
+        },
+        "lon": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": -73.95771521904042
+        },
+        "name": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": ""
+        },
+        "poi_key": null,
+        "suggested_name": "Fort Lee",
+        "type": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": "user"
+        }
+      },
+      {
+        "airport_info": null,
+        "climb_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "descent_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "frequencies": [],
+        "ident": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": ""
+        },
+        "ident_stale": false,
+        "landmark_key": "landmark:geonames:5106184",
+        "lat": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": 40.765040487524416
+        },
+        "lon": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": -74.0154009497013
+        },
+        "name": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": ""
+        },
+        "poi_key": null,
+        "suggested_name": "Weehawken",
+        "type": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": "user"
+        }
+      },
+      {
+        "airport_info": null,
+        "climb_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "descent_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "frequencies": [],
+        "ident": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": ""
+        },
+        "ident_stale": false,
+        "landmark_key": "landmark:geonames:5108135",
+        "lat": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": 40.71251245977892
+        },
+        "lon": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": -74.03204390645335
+        },
+        "name": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": ""
+        },
+        "poi_key": null,
+        "suggested_name": "Battery Park City",
+        "type": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": "user"
+        }
+      },
+      {
+        "airport_info": null,
+        "climb_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "descent_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "frequencies": [],
+        "ident": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": ""
+        },
+        "ident_stale": false,
+        "landmark_key": "landmark:geonames:5118949",
+        "lat": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": 40.68996032211076
+        },
+        "lon": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": -74.0457974119618
+        },
+        "name": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": ""
+        },
+        "poi_key": null,
+        "suggested_name": "Governors Island",
+        "type": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": "user"
+        }
+      },
+      {
+        "airport_info": {
+          "field_elevation": 23,
+          "runways": [
+            {
+              "he_heading": 256,
+              "ident": "9/27",
+              "le_heading": 76,
+              "length_ft": 4140,
+              "surface": "ASP",
+              "width_ft": 100
+            }
+          ],
+          "type": "small_airport"
+        },
+        "climb_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "descent_rate_fpm": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "frequencies": [
+          {
+            "label": "Approach",
+            "value": "135.350"
+          },
+          {
+            "label": "CLD",
+            "value": "128.350"
+          },
+          {
+            "label": "Departure",
+            "value": "119.200"
+          },
+          {
+            "label": "UNIC",
+            "value": "123.000"
+          }
+        ],
+        "ident": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": "KLDJ"
+        },
+        "ident_stale": false,
+        "landmark_key": null,
+        "lat": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": 40.617401123
+        },
+        "lon": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": -74.2445983887
+        },
+        "name": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": "Linden Airport"
+        },
+        "poi_key": "airport:ourairports:KLDJ",
+        "suggested_name": null,
+        "type": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": "airport"
+        }
+      }
+    ],
+    "route_id": "00000000-0000-4000-8000-000000000012",
+    "airac_cycle": "2610",
+    "aircraft_profile_id": "00000000-0000-4000-8000-000000000013",
+    "passed_steps": [],
+    "legs": [
+      {
+        "altitude": {
+          "computed": 2500,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "altitude_change_at": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "ata": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "compass_heading": {
+          "computed": 248,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "dev": {
+          "computed": 0,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "eta": {
+          "computed": "8:00",
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "ete": {
+          "computed": "8:00",
+          "origin": null,
+          "source": null,
+          "state": "confirmed",
+          "suggestion": null,
+          "value": "8:00"
+        },
+        "fuel_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_burn": {
+          "computed": 1.3,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_remaining": {
+          "computed": 50.5,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "gs_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "gs_est": {
+          "computed": 51,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "leg_dist": {
+          "computed": 6.8,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "mh": {
+          "computed": 248,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "oat": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2697,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 13,
+          "value": null
+        },
+        "remaining_dist": {
+          "computed": 62.9,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "tas": {
+          "computed": 54,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "tc": {
+          "computed": 222,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "th": {
+          "computed": 235,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "var": {
+          "computed": 13,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wca": {
+          "computed": 13,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wind_dir": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2697,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 302,
+          "value": null
+        },
+        "wind_vel": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2697,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 12,
+          "value": null
+        }
+      },
+      {
+        "altitude": {
+          "computed": 2500,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "altitude_change_at": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "ata": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "compass_heading": {
+          "computed": 199,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "dev": {
+          "computed": 0,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "eta": {
+          "computed": "14:10",
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "ete": {
+          "computed": "6:10",
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_burn": {
+          "computed": 0.9,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_remaining": {
+          "computed": 49.6,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "gs_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "gs_est": {
+          "computed": 128,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "leg_dist": {
+          "computed": 13.3,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "mh": {
+          "computed": 199,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "oat": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2697,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 13,
+          "value": null
+        },
+        "remaining_dist": {
+          "computed": 49.6,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "tas": {
+          "computed": 122,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "tc": {
+          "computed": 181,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "th": {
+          "computed": 186,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "var": {
+          "computed": 13,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wca": {
+          "computed": 5,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wind_dir": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2697,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 302,
+          "value": null
+        },
+        "wind_vel": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2697,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 12,
+          "value": null
+        }
+      },
+      {
+        "altitude": {
+          "computed": 3500,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "altitude_change_at": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "ata": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "compass_heading": {
+          "computed": 182,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "dev": {
+          "computed": 0,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "eta": {
+          "computed": "19:50",
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "ete": {
+          "computed": "5:40",
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_burn": {
+          "computed": 0.8,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_remaining": {
+          "computed": 48.8,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "gs_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "gs_est": {
+          "computed": 135,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "leg_dist": {
+          "computed": 12.6,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "mh": {
+          "computed": 182,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "oat": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 3500,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 12,
+          "value": null
+        },
+        "remaining_dist": {
+          "computed": 37,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "tas": {
+          "computed": 122,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "tc": {
+          "computed": 164,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "th": {
+          "computed": 169,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "var": {
+          "computed": 13,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wca": {
+          "computed": 5,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wind_dir": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 3500,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 305,
+          "value": null
+        },
+        "wind_vel": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 3500,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 17,
+          "value": null
+        }
+      },
+      {
+        "altitude": {
+          "computed": 2500,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "altitude_change_at": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "ata": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "compass_heading": {
+          "computed": 196,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "dev": {
+          "computed": 0,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "eta": {
+          "computed": "23:20",
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "ete": {
+          "computed": "3:30",
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_burn": {
+          "computed": 0.5,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_remaining": {
+          "computed": 48.3,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "gs_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "gs_est": {
+          "computed": 128,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "leg_dist": {
+          "computed": 7.6,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "mh": {
+          "computed": 196,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "oat": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2707,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 13,
+          "value": null
+        },
+        "remaining_dist": {
+          "computed": 29.4,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "tas": {
+          "computed": 122,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "tc": {
+          "computed": 178,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "th": {
+          "computed": 183,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "var": {
+          "computed": 13,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wca": {
+          "computed": 5,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wind_dir": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2707,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 300,
+          "value": null
+        },
+        "wind_vel": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2707,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 13,
+          "value": null
+        }
+      },
+      {
+        "altitude": {
+          "computed": 2500,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "altitude_change_at": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "ata": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "compass_heading": {
+          "computed": 212,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "dev": {
+          "computed": 0,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "eta": {
+          "computed": "25:40",
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "ete": {
+          "computed": "2:20",
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_burn": {
+          "computed": 0.3,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_remaining": {
+          "computed": 48,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "gs_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "gs_est": {
+          "computed": 125,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "leg_dist": {
+          "computed": 4.7,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "mh": {
+          "computed": 212,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "oat": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2707,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 13,
+          "value": null
+        },
+        "remaining_dist": {
+          "computed": 24.7,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "tas": {
+          "computed": 122,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "tc": {
+          "computed": 193,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "th": {
+          "computed": 199,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "var": {
+          "computed": 13,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wca": {
+          "computed": 6,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wind_dir": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2707,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 300,
+          "value": null
+        },
+        "wind_vel": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2707,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 13,
+          "value": null
+        }
+      },
+      {
+        "altitude": {
+          "computed": 2500,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "altitude_change_at": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "ata": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "compass_heading": {
+          "computed": 219,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "dev": {
+          "computed": 0,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "eta": {
+          "computed": "27:40",
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "ete": {
+          "computed": "2:00",
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_burn": {
+          "computed": 0.3,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_remaining": {
+          "computed": 47.7,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "gs_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "gs_est": {
+          "computed": 124,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "leg_dist": {
+          "computed": 4.1,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "mh": {
+          "computed": 219,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "oat": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2707,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 13,
+          "value": null
+        },
+        "remaining_dist": {
+          "computed": 20.6,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "tas": {
+          "computed": 122,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "tc": {
+          "computed": 200,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "th": {
+          "computed": 206,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "var": {
+          "computed": 13,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wca": {
+          "computed": 6,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wind_dir": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2707,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 300,
+          "value": null
+        },
+        "wind_vel": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2707,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 13,
+          "value": null
+        }
+      },
+      {
+        "altitude": {
+          "computed": 2500,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "altitude_change_at": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "ata": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "compass_heading": {
+          "computed": 225,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "dev": {
+          "computed": 0,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "eta": {
+          "computed": "30:30",
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "ete": {
+          "computed": "2:50",
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_burn": {
+          "computed": 0.4,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_remaining": {
+          "computed": 47.3,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "gs_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "gs_est": {
+          "computed": 122,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "leg_dist": {
+          "computed": 5.9,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "mh": {
+          "computed": 225,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "oat": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2707,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 13,
+          "value": null
+        },
+        "remaining_dist": {
+          "computed": 14.7,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "tas": {
+          "computed": 122,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "tc": {
+          "computed": 207,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "th": {
+          "computed": 213,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "var": {
+          "computed": 12,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wca": {
+          "computed": 6,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wind_dir": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2707,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 300,
+          "value": null
+        },
+        "wind_vel": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2707,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 13,
+          "value": null
+        }
+      },
+      {
+        "altitude": {
+          "computed": 2500,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "altitude_change_at": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "ata": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "compass_heading": {
+          "computed": 212,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "dev": {
+          "computed": 0,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "eta": {
+          "computed": "32:00",
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "ete": {
+          "computed": "1:30",
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_burn": {
+          "computed": 0.2,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_remaining": {
+          "computed": 47.1,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "gs_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "gs_est": {
+          "computed": 125,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "leg_dist": {
+          "computed": 3.2,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "mh": {
+          "computed": 212,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "oat": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2707,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 13,
+          "value": null
+        },
+        "remaining_dist": {
+          "computed": 11.5,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "tas": {
+          "computed": 122,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "tc": {
+          "computed": 194,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "th": {
+          "computed": 200,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "var": {
+          "computed": 12,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wca": {
+          "computed": 6,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wind_dir": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2707,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 300,
+          "value": null
+        },
+        "wind_vel": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2707,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 13,
+          "value": null
+        }
+      },
+      {
+        "altitude": {
+          "computed": 2500,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "altitude_change_at": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "ata": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "compass_heading": {
+          "computed": 223,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "dev": {
+          "computed": 0,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "eta": {
+          "computed": "32:40",
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "ete": {
+          "computed": "0:40",
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_burn": {
+          "computed": 0.1,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_remaining": {
+          "computed": 47,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "gs_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "gs_est": {
+          "computed": 122,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "leg_dist": {
+          "computed": 1.5,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "mh": {
+          "computed": 223,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "oat": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2707,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 13,
+          "value": null
+        },
+        "remaining_dist": {
+          "computed": 10,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "tas": {
+          "computed": 122,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "tc": {
+          "computed": 205,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "th": {
+          "computed": 211,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "var": {
+          "computed": 12,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wca": {
+          "computed": 6,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wind_dir": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2707,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 300,
+          "value": null
+        },
+        "wind_vel": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2707,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 13,
+          "value": null
+        }
+      },
+      {
+        "altitude": {
+          "computed": 2500,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "altitude_change_at": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "ata": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "compass_heading": {
+          "computed": 260,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "dev": {
+          "computed": 0,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "eta": {
+          "computed": "37:50",
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "ete": {
+          "computed": "5:10",
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_burn": {
+          "computed": 0.7,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "fuel_remaining": {
+          "computed": 46.3,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "gs_act": {
+          "computed": null,
+          "origin": null,
+          "source": null,
+          "state": null,
+          "suggestion": null,
+          "value": null
+        },
+        "gs_est": {
+          "computed": 116,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "leg_dist": {
+          "computed": 10,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "mh": {
+          "computed": 260,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "oat": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2713,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 14,
+          "value": null
+        },
+        "remaining_dist": {
+          "computed": 0,
+          "origin": null,
+          "source": null,
+          "state": "confirmed",
+          "suggestion": null,
+          "value": null
+        },
+        "tas": {
+          "computed": 122,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "tc": {
+          "computed": 244,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "th": {
+          "computed": 248,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "var": {
+          "computed": 12,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wca": {
+          "computed": 4,
+          "origin": null,
+          "source": null,
+          "state": "suggested",
+          "suggestion": null,
+          "value": null
+        },
+        "wind_dir": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2713,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 302,
+          "value": null
+        },
+        "wind_vel": {
+          "computed": null,
+          "origin": {
+            "altitude_ft": 2713,
+            "observed_at": "2026-09-30T13:00:00Z"
+          },
+          "source": "winds_aloft",
+          "state": "suggested",
+          "suggestion": 11,
+          "value": null
+        }
+      }
+    ],
+    "fuel": {
+      "climb": {
+        "computed": null,
+        "origin": null,
+        "source": null,
+        "state": null,
+        "suggestion": null,
+        "value": null
+      },
+      "climb_gph": {
+        "computed": 10,
+        "origin": null,
+        "source": null,
+        "state": "suggested",
+        "suggestion": null,
+        "value": null
+      },
+      "cruise": {
+        "computed": 5.5,
+        "origin": null,
+        "source": null,
+        "state": "suggested",
+        "suggestion": null,
+        "value": null
+      },
+      "cruise_gph": {
+        "computed": 8.6,
+        "origin": null,
+        "source": null,
+        "state": "suggested",
+        "suggestion": null,
+        "value": null
+      },
+      "fuel_available": {
+        "computed": 53,
+        "origin": null,
+        "source": null,
+        "state": "suggested",
+        "suggestion": null,
+        "value": null
+      },
+      "reserves": {
+        "computed": 6.5,
+        "origin": null,
+        "source": null,
+        "state": "suggested",
+        "suggestion": null,
+        "value": null
+      },
+      "reserves_gph": {
+        "computed": 8.6,
+        "origin": null,
+        "source": null,
+        "state": "suggested",
+        "suggestion": null,
+        "value": null
+      },
+      "reserves_minutes": {
+        "computed": 45,
+        "origin": null,
+        "source": null,
+        "state": "suggested",
+        "suggestion": null,
+        "value": null
+      },
+      "run_up_taxi_takeoff": {
+        "computed": 1.2,
+        "origin": null,
+        "source": null,
+        "state": "suggested",
+        "suggestion": null,
+        "value": null
+      },
+      "total": {
+        "computed": 13.2,
+        "origin": null,
+        "source": null,
+        "state": "suggested",
+        "suggestion": null,
+        "value": null
+      }
+    },
+    "flight_info": {
+      "date": {
+        "computed": null,
+        "origin": null,
+        "source": null,
+        "state": null,
+        "suggestion": null,
+        "value": ""
+      },
+      "etd": {
+        "computed": "0",
+        "origin": null,
+        "source": null,
+        "state": "suggested",
+        "suggestion": null,
+        "value": null
+      },
+      "route_name": {
+        "computed": null,
+        "origin": null,
+        "source": null,
+        "state": null,
+        "suggestion": null,
+        "value": ""
+      },
+      "transponder": {
+        "computed": null,
+        "origin": null,
+        "source": null,
+        "state": null,
+        "suggestion": null,
+        "value": ""
+      }
+    },
+    "aircraft": {
+      "registration": {
+        "computed": null,
+        "origin": null,
+        "source": null,
+        "state": null,
+        "suggestion": null,
+        "value": ""
+      },
+      "type": {
+        "computed": null,
+        "origin": null,
+        "source": null,
+        "state": null,
+        "suggestion": null,
+        "value": "C172"
+      }
+    },
+    "working_sheet": false
+  },
+  "disclaimer": "FOR FLIGHT SIMULATION USE ONLY — NOT FOR REAL AVIATION"
+}

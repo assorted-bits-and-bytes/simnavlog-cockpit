@@ -1,0 +1,82 @@
+/*
+ * The skeleton's stylesheet. Coherent GT renders like Chrome 49, and
+ * `npm test` holds this file to that: no Grid, no flex gap, no :has() or
+ * :where(), no inset, no revert. The paper look proper is #198.
+ *
+ * Every selector is prefixed `.snl-`, because the EFB build prefixes app CSS
+ * and a kneeboard host page has styles of its own.
+ */
+
+.snl-sheet {
+  background: #fbfaf6;
+  color: #111827;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 13px;
+  padding: 8px;
+}
+
+.snl-header {
+  margin-bottom: 6px;
+}
+
+.snl-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.snl-meta {
+  color: #4b5563;
+}
+
+.snl-legs {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.snl-legs th,
+.snl-legs td {
+  border: 1px solid #9ca3af;
+  overflow: hidden;
+  padding: 2px 4px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.snl-legs th {
+  background: #f3f4f6;
+  font-size: 11px;
+}
+
+.snl-legs .snl-checkpoint {
+  text-align: left;
+  width: 22%;
+}
+
+/* Ink is the pilot's, pencil the calculator's. */
+.snl-ink {
+  color: #0047ab;
+}
+
+.snl-pencil {
+  color: #6b7280;
+}
+
+.snl-state-stale {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.snl-state-invalid {
+  color: #ea580c;
+}
+
+.snl-footer {
+  color: #4b5563;
+  font-size: 11px;
+  margin-top: 6px;
+}
+
+.snl-disclaimer {
+  font-weight: bold;
+}
