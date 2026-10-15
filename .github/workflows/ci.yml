@@ -1,0 +1,39 @@
+name: ci
+
+# Every branch: work lands on master by fast-forward, never by pull request,
+# so a branch's push is the only run before it does.
+on: push
+
+jobs:
+  # The old-engine gate: CSS held to Chrome 49 by doiuse, JS bundled to
+  # es2017 by esbuild.
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm test
+
+  # In the same image scripts/screens.sh uses locally, so a baseline taken on
+  # a laptop compares exactly here.
+  screens:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble
+      options: --ipc=host
+    env:
+      HOME: /root
+    steps:
+      - uses: actions/checkout@v7
+      - run: npm ci
+      - run: npm run build
+      - run: npx playwright test
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: screenshot-diffs
+          path: test-results/
