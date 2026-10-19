@@ -2,8 +2,8 @@
 //
 //     SimNavLogRenderer.render(document.getElementById("navlog"), payload);
 //
-// The payload is SimNavLog's plan as `GET /api/v1/plans/:id` serves it, and
-// will be the render projection (`/render`) once that exists. Nothing here
+// The payload is SimNavLog's render projection, `GET /api/v1/plans/:id/render`,
+// described by the RenderResponse schema in contract/openapi.json. Nothing here
 // computes: every figure is the server's, every unit comes from the payload's
 // `fields` descriptor.
 //
@@ -130,9 +130,11 @@ function checkpointName(wp) {
 function footer(payload) {
   const foot = element("div", "snl-footer");
   foot.appendChild(element("div", "snl-disclaimer", payload.disclaimer || ""));
-  (payload.credits || []).forEach((credit) => {
-    foot.appendChild(element("div", "snl-credit", credit.text || credit.name || ""));
-  });
+  // One line, as the nav log's own footer prints it. Several of these
+  // licences make attribution a condition of use, so it is always drawn.
+  const credits = (payload.credits || []).map((c) => `${c.name} (${c.credit})`);
+  if (credits.length)
+    foot.appendChild(element("div", "snl-credits", `Data sources: ${credits.join(" · ")}`));
   return foot;
 }
 

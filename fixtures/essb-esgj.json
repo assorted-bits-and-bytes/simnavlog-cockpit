@@ -39,7 +39,7 @@
       "unit": "degree"
     },
     "eta": {
-      "convention": "the cell's own text: elapsed time written like an ete (\"1h20\") when no departure time is set, a clock time (\"15:20Z\") when one is. See `elapsed_min` and `arrival` for the figures behind it",
+      "convention": "the cell's own text: elapsed time written like an ete (\"1h20\") when no departure time is set, a clock time (\"15:20Z\") when one is. The figures behind it are `arrivals` in GET /plans/{id}/render",
       "type": "string",
       "unit": "minute"
     },
@@ -143,8 +143,248 @@
       "unit": "knot"
     }
   },
+  "columns": {
+    "columns": [
+      {
+        "label": "Alt.",
+        "type": "single",
+        "group": null,
+        "fields": [
+          "altitude"
+        ],
+        "key": "altitude",
+        "widths": [
+          "6.0106%"
+        ],
+        "align": "leg",
+        "sub_labels": null,
+        "group_label": null
+      },
+      {
+        "label": null,
+        "type": "wind_block",
+        "group": "wind",
+        "fields": [
+          "wind_dir",
+          "wind_vel",
+          "oat"
+        ],
+        "key": "wind",
+        "widths": [
+          "5.284%",
+          "6.2087%"
+        ],
+        "align": "leg",
+        "sub_labels": [
+          [
+            "Dir",
+            "Spd"
+          ],
+          "Temp."
+        ],
+        "group_label": "Wind"
+      },
+      {
+        "label": "TAS",
+        "type": "single",
+        "group": null,
+        "fields": [
+          "tas"
+        ],
+        "key": "tas",
+        "widths": [
+          "5.9445%"
+        ],
+        "align": "leg",
+        "sub_labels": null,
+        "group_label": null
+      },
+      {
+        "label": null,
+        "type": "dual",
+        "group": "course",
+        "fields": [
+          "tc",
+          "wca"
+        ],
+        "key": "tc_wca",
+        "widths": [
+          "6.0106%"
+        ],
+        "align": "leg",
+        "sub_labels": [
+          "TC",
+          "WCA"
+        ],
+        "group_label": "Course"
+      },
+      {
+        "label": null,
+        "type": "dual",
+        "group": "course",
+        "fields": [
+          "th",
+          "var"
+        ],
+        "key": "th_var",
+        "widths": [
+          "5.8785%"
+        ],
+        "align": "leg",
+        "sub_labels": [
+          "TH",
+          "VAR"
+        ],
+        "group_label": "Course"
+      },
+      {
+        "label": null,
+        "type": "dual",
+        "group": "course",
+        "fields": [
+          "mh",
+          "dev"
+        ],
+        "key": "mh_dev",
+        "widths": [
+          "5.8785%"
+        ],
+        "align": "leg",
+        "sub_labels": [
+          "MH",
+          "DEV"
+        ],
+        "group_label": "Course"
+      },
+      {
+        "label": null,
+        "type": "single",
+        "group": "course",
+        "fields": [
+          "compass_heading"
+        ],
+        "key": "compass_heading",
+        "widths": [
+          "5.6803%"
+        ],
+        "align": "leg",
+        "sub_labels": [
+          "CH",
+          null
+        ],
+        "group_label": "Course"
+      },
+      {
+        "label": "Dist.",
+        "type": "dual",
+        "group": null,
+        "fields": [
+          "leg_dist",
+          "remaining_dist"
+        ],
+        "key": "leg_dist",
+        "widths": [
+          "6.2748%"
+        ],
+        "align": "leg",
+        "sub_labels": [
+          "Leg",
+          "Rem."
+        ],
+        "group_label": null
+      },
+      {
+        "label": "GS",
+        "type": "dual",
+        "group": null,
+        "fields": [
+          "gs_est",
+          "gs_act"
+        ],
+        "key": "gs",
+        "widths": [
+          "5.8124%"
+        ],
+        "align": "leg",
+        "sub_labels": [
+          "Est.",
+          "Act."
+        ],
+        "group_label": null
+      },
+      {
+        "label": "ETE",
+        "type": "single",
+        "group": null,
+        "fields": [
+          "ete"
+        ],
+        "key": "ete",
+        "widths": [
+          "4.7556%"
+        ],
+        "align": "leg",
+        "sub_labels": null,
+        "group_label": null
+      },
+      {
+        "label": "Fuel Burn",
+        "type": "single",
+        "group": null,
+        "fields": [
+          "fuel_burn"
+        ],
+        "key": "fuel_burn",
+        "widths": [
+          "5.284%"
+        ],
+        "align": "leg",
+        "sub_labels": null,
+        "group_label": null
+      },
+      {
+        "label": null,
+        "type": "dual",
+        "group": "time",
+        "fields": [
+          "eta",
+          "ata"
+        ],
+        "key": "eta_ata",
+        "widths": [
+          "5.8785%"
+        ],
+        "align": "checkpoint",
+        "sub_labels": [
+          "ETA",
+          "ATA"
+        ],
+        "group_label": "Time"
+      },
+      {
+        "label": null,
+        "type": "dual",
+        "group": "fuel",
+        "fields": [
+          "fuel_remaining",
+          "fuel_act"
+        ],
+        "key": "fuel_rem_act",
+        "widths": [
+          "5.2839%"
+        ],
+        "align": "checkpoint",
+        "sub_labels": [
+          "Rem",
+          "Act"
+        ],
+        "group_label": "Fuel"
+      }
+    ],
+    "checkpoint_width": "19.8151%"
+  },
   "plan": {
-    "id": "00000000-0000-4000-8000-000000000001",
+    "id": "00000000-0000-4000-8000-0000000000011",
     "label": "Bromma to Jönköping",
     "origin": null,
     "waypoints": [
@@ -656,19 +896,6 @@
           "value": "airport"
         }
       }
-    ],
-    "route_id": "00000000-0000-4000-8000-000000000002",
-    "airac_cycle": "2610",
-    "aircraft_profile_id": "00000000-0000-4000-8000-000000000003",
-    "passed_steps": [
-      "add_checkpoints",
-      "choose_altitude",
-      "determine_tas",
-      "enter_winds_aloft",
-      "measure_distances_courses",
-      "obtain_weather",
-      "plot_course",
-      "select_aircraft"
     ],
     "legs": [
       {
@@ -1842,6 +2069,40 @@
         }
       }
     ],
+    "flight_info": {
+      "date": {
+        "computed": null,
+        "origin": null,
+        "source": null,
+        "state": null,
+        "suggestion": null,
+        "value": "2026-09-26"
+      },
+      "etd": {
+        "computed": null,
+        "origin": null,
+        "source": null,
+        "state": "confirmed",
+        "suggestion": null,
+        "value": "15:00Z"
+      },
+      "route_name": {
+        "computed": null,
+        "origin": null,
+        "source": null,
+        "state": null,
+        "suggestion": null,
+        "value": "ESSB - ESGJ"
+      },
+      "transponder": {
+        "computed": null,
+        "origin": null,
+        "source": null,
+        "state": null,
+        "suggestion": null,
+        "value": "7000"
+      }
+    },
     "fuel": {
       "climb": {
         "computed": 2.1,
@@ -1924,40 +2185,7 @@
         "value": null
       }
     },
-    "flight_info": {
-      "date": {
-        "computed": null,
-        "origin": null,
-        "source": null,
-        "state": null,
-        "suggestion": null,
-        "value": "2026-09-26"
-      },
-      "etd": {
-        "computed": null,
-        "origin": null,
-        "source": null,
-        "state": "confirmed",
-        "suggestion": null,
-        "value": "15:00Z"
-      },
-      "route_name": {
-        "computed": null,
-        "origin": null,
-        "source": null,
-        "state": null,
-        "suggestion": null,
-        "value": "ESSB - ESGJ"
-      },
-      "transponder": {
-        "computed": null,
-        "origin": null,
-        "source": null,
-        "state": null,
-        "suggestion": null,
-        "value": "7000"
-      }
-    },
+    "route_id": "00000000-0000-4000-8000-0000000000012",
     "aircraft": {
       "registration": {
         "computed": null,
@@ -1976,7 +2204,1937 @@
         "value": "C172"
       }
     },
+    "passed_steps": [
+      "add_checkpoints",
+      "choose_altitude",
+      "determine_tas",
+      "enter_winds_aloft",
+      "measure_distances_courses",
+      "obtain_weather",
+      "plot_course",
+      "select_aircraft"
+    ],
+    "aircraft_profile_id": "00000000-0000-4000-8000-0000000000013",
+    "airac_cycle": "2610",
     "working_sheet": false
   },
-  "disclaimer": "FOR FLIGHT SIMULATION USE ONLY — NOT FOR REAL AVIATION"
+  "terrain": {
+    "source": {
+      "max_elevation_ft": 906,
+      "min_elevation_ft": 0,
+      "resolution": "coarse",
+      "unresolved_cells": 0
+    },
+    "profile_height": 96,
+    "profile_vbox": "0 0 164.5 96",
+    "total_nm": 164.5,
+    "y_ceil": 8000,
+    "y_scale": 0.012,
+    "sea_level": null,
+    "ticks": [
+      {
+        "label": "",
+        "major": false,
+        "length": 3,
+        "y": 90
+      },
+      {
+        "label": "1k",
+        "major": true,
+        "length": 6,
+        "y": 84
+      },
+      {
+        "label": "",
+        "major": false,
+        "length": 3,
+        "y": 78
+      },
+      {
+        "label": "2k",
+        "major": true,
+        "length": 6,
+        "y": 72
+      },
+      {
+        "label": "",
+        "major": false,
+        "length": 3,
+        "y": 66
+      },
+      {
+        "label": "3k",
+        "major": true,
+        "length": 6,
+        "y": 60
+      },
+      {
+        "label": "",
+        "major": false,
+        "length": 3,
+        "y": 54
+      },
+      {
+        "label": "4k",
+        "major": true,
+        "length": 6,
+        "y": 48
+      },
+      {
+        "label": "",
+        "major": false,
+        "length": 3,
+        "y": 42
+      },
+      {
+        "label": "5k",
+        "major": true,
+        "length": 6,
+        "y": 36
+      },
+      {
+        "label": "",
+        "major": false,
+        "length": 3,
+        "y": 30
+      },
+      {
+        "label": "6k",
+        "major": true,
+        "length": 6,
+        "y": 24
+      },
+      {
+        "label": "",
+        "major": false,
+        "length": 3,
+        "y": 18
+      },
+      {
+        "label": "7k",
+        "major": true,
+        "length": 6,
+        "y": 12
+      },
+      {
+        "label": "",
+        "major": false,
+        "length": 3,
+        "y": 6
+      }
+    ],
+    "polygon_points": "0,96.0 0.0,93.0 2.0,93.0 4.2,93.0 6.9,93.0 11.8,93.0 11.9,93.0 16.7,92.96 19.6,93.0 21.7,93.0 26.7,93.0 27.3,93.0 31.7,93.0 34.9,93.0 36.6,93.0 41.6,93.0 42.6,93.0 46.5,93.0 49.8,93.0 53.1,93.0 55.4,93.0 56.5,93.0 59.8,93.0 63.1,93.0 66.5,93.0 69.8,93.0 72.7,93.0 73.1,93.0 76.4,93.0 79.6,93.0 82.8,93.0 86.0,93.0 89.2,93.0 92.4,92.96 95.6,92.93 98.8,92.53 100.6,93.0 102.0,92.89 105.2,92.53 108.4,91.63 111.7,91.75 114.9,91.82 118.5,91.63 121.4,92.06 125.2,88.99 128.3,91.08 132.0,87.22 135.2,92.53 138.8,87.92 142.1,92.53 145.7,88.87 147.8,87.26 152.8,92.53 153.5,92.53 157.9,87.82 161.2,87.3 162.9,85.13 164.5,87.11 164.5,96.0",
+    "flight_profile_points": "0.0,95.44 18.1,18.0 46.2,18.0 73.7,18.0 115.2,18.0 144.4,18.0 144.4,18.0 164.5,87.11",
+    "waypoint_distances": [
+      {
+        "ident": "ESSB",
+        "cumulative_nm": 0
+      },
+      {
+        "ident": "TOC",
+        "cumulative_nm": 18.1
+      },
+      {
+        "ident": "",
+        "cumulative_nm": 46.2
+      },
+      {
+        "ident": "",
+        "cumulative_nm": 73.7
+      },
+      {
+        "ident": "",
+        "cumulative_nm": 115.2
+      },
+      {
+        "ident": "",
+        "cumulative_nm": 144.4
+      },
+      {
+        "ident": "ESGJ",
+        "cumulative_nm": 164.5
+      }
+    ],
+    "msa_lines": [
+      {
+        "y": 86.4,
+        "x1": 0,
+        "x2": 18.1
+      },
+      {
+        "y": 86.4,
+        "x1": 18.1,
+        "x2": 46.2
+      },
+      {
+        "y": 86.4,
+        "x1": 46.2,
+        "x2": 73.7
+      },
+      {
+        "y": 85.2,
+        "x1": 73.7,
+        "x2": 115.2
+      },
+      {
+        "y": 80.4,
+        "x1": 115.2,
+        "x2": 144.4
+      },
+      {
+        "y": 78,
+        "x1": 144.4,
+        "x2": 164.5
+      }
+    ],
+    "night_rects": [],
+    "airspace_slices": [
+      {
+        "label": "SFC",
+        "priority": 2,
+        "title": "BROMMA CTR · SFC–2000",
+        "width": 7.84,
+        "y": 72,
+        "x": 0,
+        "height": 23.44,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 0,
+        "label_y": 86.4
+      },
+      {
+        "label": null,
+        "priority": 2,
+        "title": "STOCKHOLM TMA · 2000–FL95",
+        "width": 7.84,
+        "y": 0,
+        "x": 0,
+        "height": 72,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 0,
+        "label_y": 63
+      },
+      {
+        "label": null,
+        "priority": 1,
+        "title": "ES-R24 DROTTNINGHOLM · SFC–2000",
+        "width": 0.98,
+        "y": 72,
+        "x": 1.96,
+        "height": 22.46,
+        "opacity": 0.2,
+        "fill": "#f97316",
+        "label_left_pct": 1.19,
+        "label_y": 85.5
+      },
+      {
+        "label": "2000",
+        "priority": 2,
+        "title": "STOCKHOLM TMA · 2000–FL95",
+        "width": 14.74,
+        "y": 0,
+        "x": 8.82,
+        "height": 72,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 5.36,
+        "label_y": 63
+      },
+      {
+        "label": "3000",
+        "priority": 2,
+        "title": "STOCKHOLM TMA · 3000–FL95",
+        "width": 4.92,
+        "y": 0,
+        "x": 24.54,
+        "height": 60,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 14.92,
+        "label_y": 51
+      },
+      {
+        "label": "1600",
+        "priority": 2,
+        "title": "NYKÖPING · 1600–4500",
+        "width": 27.54,
+        "y": 42,
+        "x": 30.45,
+        "height": 34.8,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 18.51,
+        "label_y": 67.8
+      },
+      {
+        "label": null,
+        "priority": 2,
+        "title": "ÖSTGÖTA TMA · 1600–FL95",
+        "width": 77.83,
+        "y": 0,
+        "x": 30.45,
+        "height": 76.8,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 18.51,
+        "label_y": 67.8
+      },
+      {
+        "label": null,
+        "priority": 2,
+        "title": "ÖSTGÖTA TMA · 4500–FL95",
+        "width": 77.83,
+        "y": 0,
+        "x": 30.45,
+        "height": 42,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 18.51,
+        "label_y": 33
+      },
+      {
+        "label": "SFC",
+        "priority": 2,
+        "title": "SKAVSTA CTR · SFC–1600",
+        "width": 16.71,
+        "y": 76.8,
+        "x": 38.33,
+        "height": 17.9,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 23.3,
+        "label_y": 85.7
+      },
+      {
+        "label": "1600",
+        "priority": 2,
+        "title": "NORRKÖPING · 1600–4500",
+        "width": 28.57,
+        "y": 42,
+        "x": 58.97,
+        "height": 34.8,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 35.85,
+        "label_y": 67.8
+      },
+      {
+        "label": "SFC",
+        "priority": 2,
+        "title": "KUNGSÄNGEN CTR · SFC–1600",
+        "width": 17.73,
+        "y": 76.8,
+        "x": 63.88,
+        "height": 19.04,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 38.83,
+        "label_y": 86.8
+      },
+      {
+        "label": "1600",
+        "priority": 2,
+        "title": "LINKÖPING · 1600–4500",
+        "width": 19.76,
+        "y": 42,
+        "x": 88.52,
+        "height": 34.8,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 53.81,
+        "label_y": 67.8
+      },
+      {
+        "label": "SFC",
+        "priority": 2,
+        "title": "SAAB CTR · SFC–1600",
+        "width": 2.96,
+        "y": 76.8,
+        "x": 96.43,
+        "height": 15.73,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 58.62,
+        "label_y": 83.5
+      },
+      {
+        "label": "1700",
+        "priority": 2,
+        "title": "KARLSBORG TMA · 1700–FL95",
+        "width": 9.82,
+        "y": 0,
+        "x": 109.27,
+        "height": 75.6,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 66.43,
+        "label_y": 66.6
+      },
+      {
+        "label": null,
+        "priority": 1,
+        "title": "ES-R22B VÄTTERN · SFC–4500",
+        "width": 1.95,
+        "y": 42,
+        "x": 128.83,
+        "height": 54,
+        "opacity": 0.2,
+        "fill": "#f97316",
+        "label_left_pct": 78.31,
+        "label_y": 87
+      },
+      {
+        "label": null,
+        "priority": 2,
+        "title": "JÖNKÖPING TMA · 4500–FL95",
+        "width": 6.76,
+        "y": 0,
+        "x": 140.51,
+        "height": 42,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 85.41,
+        "label_y": 33
+      },
+      {
+        "label": "JÖNKÖPING TMA 2200",
+        "priority": 2,
+        "title": "JÖNKÖPING TMA · 2200–FL95",
+        "width": 16.27,
+        "y": 0,
+        "x": 148.23,
+        "height": 69.6,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 90.11,
+        "label_y": 60.6
+      },
+      {
+        "label": null,
+        "priority": 2,
+        "title": "JÖNKÖPING CTR · SFC–2200",
+        "width": 9.57,
+        "y": 69.6,
+        "x": 154.93,
+        "height": 18.22,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 94.18,
+        "label_y": 78.8
+      }
+    ],
+    "cloud_elements": [],
+    "altitude_labels": [
+      {
+        "label": "6500",
+        "y": 8,
+        "left_pct": 11
+      }
+    ],
+    "transition_marks": []
+  },
+  "disclaimer": "FOR FLIGHT SIMULATION USE ONLY — NOT FOR REAL AVIATION",
+  "arrivals": [
+    {
+      "basis": "zulu",
+      "clock": "15:12",
+      "elapsed_min": 12
+    },
+    {
+      "basis": "zulu",
+      "clock": "15:28",
+      "elapsed_min": 28
+    },
+    {
+      "basis": "zulu",
+      "clock": "15:44",
+      "elapsed_min": 44
+    },
+    {
+      "basis": "zulu",
+      "clock": "16:08",
+      "elapsed_min": 68
+    },
+    {
+      "basis": "zulu",
+      "clock": "16:26",
+      "elapsed_min": 86
+    },
+    {
+      "basis": "zulu",
+      "clock": "16:38",
+      "elapsed_min": 98
+    }
+  ],
+  "totals": {
+    "ete": "1h38",
+    "distance_nm": 164.5,
+    "fuel_burn": 14.1,
+    "ete_minutes": 98
+  },
+  "timeline": {
+    "night_spans": [],
+    "flight": {
+      "points": [
+        {
+          "kind": "field",
+          "ft": 47,
+          "nm": 0
+        },
+        {
+          "kind": "level",
+          "ft": 6500,
+          "nm": 18.1
+        },
+        {
+          "kind": "level",
+          "ft": 6500,
+          "nm": 46.2
+        },
+        {
+          "kind": "level",
+          "ft": 6500,
+          "nm": 73.7
+        },
+        {
+          "kind": "level",
+          "ft": 6500,
+          "nm": 115.2
+        },
+        {
+          "kind": "level",
+          "ft": 6500,
+          "nm": 144.4
+        },
+        {
+          "kind": "ramp",
+          "ft": 6500,
+          "nm": 144.4
+        },
+        {
+          "kind": "field",
+          "ft": 741,
+          "nm": 164.5
+        }
+      ],
+      "transitions": []
+    },
+    "frequency_lanes": [
+      {
+        "name": "STOCKHOLM TMA",
+        "category": "app",
+        "role": "App",
+        "from_nm": 0,
+        "to_nm": 23.559375,
+        "floor_ft": 2000,
+        "lane": 2,
+        "frequency": {
+          "label": "Approach",
+          "value": "123.750"
+        },
+        "units": [
+          "STOCKHOLM TMA"
+        ],
+        "left_pct": 10.416666666666668,
+        "right_pct": 29.51388888888889,
+        "bar_right_pct": 21.754765070921984
+      },
+      {
+        "name": "BROMMA CTR",
+        "category": "twr",
+        "role": "Twr",
+        "from_nm": 0,
+        "to_nm": 7.84,
+        "floor_ft": 0,
+        "lane": 1,
+        "frequency": {
+          "label": "Tower",
+          "value": "118.100"
+        },
+        "units": [
+          "BROMMA CTR"
+        ],
+        "left_pct": 10.416666666666668,
+        "right_pct": 27.38888888888889,
+        "bar_right_pct": 14.189716312056738
+      },
+      {
+        "name": "BROMMA CTR",
+        "category": "app",
+        "role": "App",
+        "from_nm": 0,
+        "to_nm": 7.84,
+        "floor_ft": 0,
+        "lane": 0,
+        "frequency": {
+          "label": "Approach",
+          "value": "120.150"
+        },
+        "units": [
+          "BROMMA CTR"
+        ],
+        "left_pct": 10.416666666666668,
+        "right_pct": 27.38888888888889,
+        "bar_right_pct": 14.189716312056738
+      },
+      {
+        "name": "ÖSTGÖTA TMA",
+        "category": "app",
+        "role": "App",
+        "from_nm": 24.54375,
+        "to_nm": 108.28333333333333,
+        "floor_ft": 1600,
+        "lane": 3,
+        "frequency": {
+          "label": "Approach",
+          "value": "132.955"
+        },
+        "units": [
+          "STOCKHOLM TMA",
+          "ÖSTGÖTA TMA"
+        ],
+        "left_pct": 22.228501773049643,
+        "right_pct": 62.52870651806822,
+        "bar_right_pct": 62.52870651806822
+      },
+      {
+        "name": "KARLSBORG TMA",
+        "category": "app",
+        "role": "App",
+        "from_nm": 109.27142857142857,
+        "to_nm": 119.09333333333333,
+        "floor_ft": 1700,
+        "lane": 0,
+        "frequency": {
+          "label": "Approach",
+          "value": "130.000"
+        },
+        "units": [
+          "KARLSBORG TMA"
+        ],
+        "left_pct": 63.004233608336946,
+        "right_pct": 82.10145583055916,
+        "bar_right_pct": 67.73108747044917
+      },
+      {
+        "name": "JÖNKÖPING CTR",
+        "category": "twr",
+        "role": "Twr",
+        "from_nm": 154.92857142857144,
+        "to_nm": 164.5,
+        "floor_ft": 0,
+        "lane": 0,
+        "frequency": {
+          "label": "Tower",
+          "value": "118.250"
+        },
+        "units": [
+          "JÖNKÖPING CTR"
+        ],
+        "left_pct": 84.97702272398321,
+        "right_pct": 104.07424494620543,
+        "bar_right_pct": 89.58333333333333
+      }
+    ],
+    "handover_pcts": [
+      22.228501773049643,
+      63.004233608336946,
+      84.97702272398321
+    ],
+    "marker_pcts": [
+      10.416666666666668,
+      32.65070921985816,
+      45.88525835866261,
+      65.85739614994934,
+      79.91008105369808,
+      89.58333333333333
+    ],
+    "first_pct": 10.416666666666668,
+    "leg_labels": [
+      {
+        "label": {
+          "distance": "46 NM",
+          "heading": "215°",
+          "gap_pct": 22.23404255319149,
+          "ete": null
+        },
+        "center_pct": 21.533687943262414
+      },
+      {
+        "label": {
+          "distance": "28 NM",
+          "heading": "242°",
+          "gap_pct": 13.234549138804454,
+          "ete": null
+        },
+        "center_pct": 39.267983789260384
+      },
+      {
+        "label": {
+          "distance": "42 NM",
+          "heading": "249°",
+          "gap_pct": 19.972137791286727,
+          "ete": null
+        },
+        "center_pct": 55.871327254305974
+      },
+      {
+        "label": {
+          "distance": "29 NM",
+          "heading": "203°",
+          "gap_pct": 14.052684903748741,
+          "ete": null
+        },
+        "center_pct": 72.88373860182371
+      },
+      {
+        "label": {
+          "distance": "20 NM",
+          "heading": "211°",
+          "gap_pct": 9.67325227963525,
+          "ete": null
+        },
+        "center_pct": 84.7467071935157
+      }
+    ],
+    "airport_cards": [
+      {
+        "pct": 10.416666666666668,
+        "checkpoint": 0
+      },
+      {
+        "pct": 89.58333333333333,
+        "checkpoint": 1
+      }
+    ],
+    "enroute_labels": [
+      {
+        "name": "Nyköping",
+        "sub": null,
+        "pct": 32.65070921985816
+      },
+      {
+        "name": "Norrköping",
+        "sub": null,
+        "pct": 45.88525835866261
+      },
+      {
+        "name": "Vadstena",
+        "sub": null,
+        "pct": 65.85739614994934
+      },
+      {
+        "name": "Gränna",
+        "sub": null,
+        "pct": 79.91008105369808
+      },
+      {
+        "name": "TOC",
+        "sub": null,
+        "pct": 19.1274062816616
+      }
+    ],
+    "event_pcts": [
+      19.1274062816616
+    ],
+    "last_pct": 89.58333333333333,
+    "stat_stacks": [
+      {
+        "heading": null,
+        "fuel": "39 gal",
+        "pct": 10.416666666666668,
+        "eta": "15:00Z"
+      },
+      {
+        "heading": null,
+        "fuel": "25 gal",
+        "pct": 89.58333333333333,
+        "eta": "16:38Z"
+      },
+      {
+        "heading": "↱ 242°",
+        "fuel": "34 gal",
+        "pct": 32.65070921985816,
+        "eta": "15:28Z"
+      },
+      {
+        "heading": "↱ 249°",
+        "fuel": "32 gal",
+        "pct": 45.88525835866261,
+        "eta": "15:44Z"
+      },
+      {
+        "heading": "↰ 203°",
+        "fuel": "29 gal",
+        "pct": 65.85739614994934,
+        "eta": "16:08Z"
+      },
+      {
+        "heading": "↱ 211°",
+        "fuel": "26 gal",
+        "pct": 79.91008105369808,
+        "eta": "16:26Z"
+      }
+    ],
+    "transition_pcts": [],
+    "airspace": [
+      {
+        "name": "BROMMA CTR",
+        "type": "ctr",
+        "from_nm": 0,
+        "to_nm": 7.84,
+        "frequency": {
+          "label": "Approach",
+          "value": "120.150"
+        },
+        "icao_class": "c",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "ft",
+              "value": 2000,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 0,
+            "to_nm": 7.84,
+            "floor_ft": 0,
+            "ceiling_ft": 2000
+          }
+        ]
+      },
+      {
+        "name": "CTA SUECIA",
+        "type": "cta",
+        "from_nm": 0,
+        "to_nm": 164.5,
+        "frequency": {
+          "label": "Approach",
+          "value": "123.750"
+        },
+        "icao_class": "c",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "fl",
+              "value": 660,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "fl",
+              "value": 95,
+              "datum": "std"
+            },
+            "from_nm": 0,
+            "to_nm": 164.5,
+            "floor_ft": 9500,
+            "ceiling_ft": 66000
+          }
+        ]
+      },
+      {
+        "name": "ESAA FIR",
+        "type": "fir",
+        "from_nm": 0,
+        "to_nm": 164.5,
+        "frequency": null,
+        "icao_class": "sua",
+        "shelves": [
+          {
+            "restriction": null,
+            "upper": {
+              "unit": "fl",
+              "value": 999,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 0,
+            "to_nm": 164.5,
+            "floor_ft": 0,
+            "ceiling_ft": 99900
+          }
+        ]
+      },
+      {
+        "name": "STOCKHOLM TMA",
+        "type": "tma",
+        "from_nm": 0,
+        "to_nm": 7.84,
+        "frequency": {
+          "label": "Approach",
+          "value": "123.750"
+        },
+        "icao_class": "c",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "fl",
+              "value": 95,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 2000,
+              "datum": "msl"
+            },
+            "from_nm": 0,
+            "to_nm": 7.84,
+            "floor_ft": 2000,
+            "ceiling_ft": 9500
+          }
+        ]
+      },
+      {
+        "name": "ES-R24 DROTTNINGHOLM",
+        "type": "restricted",
+        "from_nm": 1.96,
+        "to_nm": 2.94,
+        "frequency": null,
+        "icao_class": "sua",
+        "shelves": [
+          {
+            "restriction": "restricted",
+            "upper": {
+              "unit": "ft",
+              "value": 2000,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 1.96,
+            "to_nm": 2.94,
+            "floor_ft": 0,
+            "ceiling_ft": 2000
+          }
+        ]
+      },
+      {
+        "name": "STOCKHOLM TMA",
+        "type": "tma",
+        "from_nm": 8.819999999999999,
+        "to_nm": 23.559375,
+        "frequency": {
+          "label": "Approach",
+          "value": "123.750"
+        },
+        "icao_class": "c",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "fl",
+              "value": 95,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 2000,
+              "datum": "msl"
+            },
+            "from_nm": 8.819999999999999,
+            "to_nm": 23.559375,
+            "floor_ft": 2000,
+            "ceiling_ft": 9500
+          }
+        ]
+      },
+      {
+        "name": "ES-R98 HALL",
+        "type": "restricted",
+        "from_nm": 13.719999999999999,
+        "to_nm": 13.719999999999999,
+        "frequency": null,
+        "icao_class": "sua",
+        "shelves": [
+          {
+            "restriction": "restricted",
+            "upper": {
+              "unit": "ft",
+              "value": 2000,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 13.719999999999999,
+            "to_nm": 13.719999999999999,
+            "floor_ft": 0,
+            "ceiling_ft": 2000
+          }
+        ]
+      },
+      {
+        "name": "STOCKHOLM TMA",
+        "type": "tma",
+        "from_nm": 24.54375,
+        "to_nm": 29.465625,
+        "frequency": {
+          "label": "Approach",
+          "value": "132.955"
+        },
+        "icao_class": "c",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "fl",
+              "value": 95,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 3000,
+              "datum": "msl"
+            },
+            "from_nm": 24.54375,
+            "to_nm": 29.465625,
+            "floor_ft": 3000,
+            "ceiling_ft": 9500
+          }
+        ]
+      },
+      {
+        "name": "NYKÖPING",
+        "type": "tma",
+        "from_nm": 30.45,
+        "to_nm": 57.98571428571429,
+        "frequency": {
+          "label": "Approach",
+          "value": "132.955"
+        },
+        "icao_class": "c",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "ft",
+              "value": 4500,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 1600,
+              "datum": "msl"
+            },
+            "from_nm": 30.45,
+            "to_nm": 57.98571428571429,
+            "floor_ft": 1600,
+            "ceiling_ft": 4500
+          }
+        ]
+      },
+      {
+        "name": "ÖSTGÖTA TMA",
+        "type": "tma",
+        "from_nm": 30.45,
+        "to_nm": 108.28333333333333,
+        "frequency": {
+          "label": "Approach",
+          "value": "132.955"
+        },
+        "icao_class": "c",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "fl",
+              "value": 95,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 1600,
+              "datum": "msl"
+            },
+            "from_nm": 30.45,
+            "to_nm": 108.28333333333333,
+            "floor_ft": 1600,
+            "ceiling_ft": 9500
+          },
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "fl",
+              "value": 95,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 4500,
+              "datum": "msl"
+            },
+            "from_nm": 30.45,
+            "to_nm": 108.28333333333333,
+            "floor_ft": 4500,
+            "ceiling_ft": 9500
+          }
+        ]
+      },
+      {
+        "name": "SKAVSTA CTR",
+        "type": "ctr",
+        "from_nm": 38.325,
+        "to_nm": 55.03928571428572,
+        "frequency": {
+          "label": "Approach",
+          "value": "132.955"
+        },
+        "icao_class": "c",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "ft",
+              "value": 1600,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 38.325,
+            "to_nm": 55.03928571428572,
+            "floor_ft": 0,
+            "ceiling_ft": 1600
+          }
+        ]
+      },
+      {
+        "name": "KILA",
+        "type": "gliding_sector",
+        "from_nm": 53.075,
+        "to_nm": 57.98571428571429,
+        "frequency": null,
+        "icao_class": "sua",
+        "shelves": [
+          {
+            "restriction": null,
+            "upper": {
+              "unit": "fl",
+              "value": 90,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 53.075,
+            "to_nm": 57.98571428571429,
+            "floor_ft": 0,
+            "ceiling_ft": 9000
+          }
+        ]
+      },
+      {
+        "name": "NORRKÖPING",
+        "type": "tma",
+        "from_nm": 58.96785714285715,
+        "to_nm": 87.53333333333333,
+        "frequency": {
+          "label": "Approach",
+          "value": "133.350"
+        },
+        "icao_class": "c",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "ft",
+              "value": 4500,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 1600,
+              "datum": "msl"
+            },
+            "from_nm": 58.96785714285715,
+            "to_nm": 87.53333333333333,
+            "floor_ft": 1600,
+            "ceiling_ft": 4500
+          }
+        ]
+      },
+      {
+        "name": "KUNGSÄNGEN CTR",
+        "type": "ctr",
+        "from_nm": 63.87857142857143,
+        "to_nm": 81.6047619047619,
+        "frequency": {
+          "label": "Approach",
+          "value": "133.350"
+        },
+        "icao_class": "c",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "ft",
+              "value": 1600,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 63.87857142857143,
+            "to_nm": 81.6047619047619,
+            "floor_ft": 0,
+            "ceiling_ft": 1600
+          }
+        ]
+      },
+      {
+        "name": "KUNGSÄNGEN NÄRSEKTOR",
+        "type": "gliding_sector",
+        "from_nm": 69.77142857142857,
+        "to_nm": 72.71785714285714,
+        "frequency": null,
+        "icao_class": "sua",
+        "shelves": [
+          {
+            "restriction": null,
+            "upper": {
+              "unit": "fl",
+              "value": 90,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 69.77142857142857,
+            "to_nm": 72.71785714285714,
+            "floor_ft": 0,
+            "ceiling_ft": 9000
+          }
+        ]
+      },
+      {
+        "name": "HIMMELSTALUND",
+        "type": "gliding_sector",
+        "from_nm": 73.7,
+        "to_nm": 76.66428571428571,
+        "frequency": null,
+        "icao_class": "sua",
+        "shelves": [
+          {
+            "restriction": null,
+            "upper": {
+              "unit": "fl",
+              "value": 90,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 73.7,
+            "to_nm": 76.66428571428571,
+            "floor_ft": 0,
+            "ceiling_ft": 9000
+          }
+        ]
+      },
+      {
+        "name": "TOLSKEPP",
+        "type": "gliding_sector",
+        "from_nm": 86.54523809523809,
+        "to_nm": 90.49761904761905,
+        "frequency": null,
+        "icao_class": "sua",
+        "shelves": [
+          {
+            "restriction": null,
+            "upper": {
+              "unit": "fl",
+              "value": 90,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 1600,
+              "datum": "msl"
+            },
+            "from_nm": 86.54523809523809,
+            "to_nm": 90.49761904761905,
+            "floor_ft": 1600,
+            "ceiling_ft": 9000
+          }
+        ]
+      },
+      {
+        "name": "LINKÖPING",
+        "type": "tma",
+        "from_nm": 88.52142857142857,
+        "to_nm": 108.28333333333333,
+        "frequency": {
+          "label": "Approach",
+          "value": "132.950"
+        },
+        "icao_class": "c",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "ft",
+              "value": 4500,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 1600,
+              "datum": "msl"
+            },
+            "from_nm": 88.52142857142857,
+            "to_nm": 108.28333333333333,
+            "floor_ft": 1600,
+            "ceiling_ft": 4500
+          }
+        ]
+      },
+      {
+        "name": "SAAB CTR",
+        "type": "ctr",
+        "from_nm": 96.42619047619048,
+        "to_nm": 99.39047619047619,
+        "frequency": {
+          "label": "Approach",
+          "value": "132.950"
+        },
+        "icao_class": "c",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "ft",
+              "value": 1600,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 96.42619047619048,
+            "to_nm": 99.39047619047619,
+            "floor_ft": 0,
+            "ceiling_ft": 1600
+          }
+        ]
+      },
+      {
+        "name": "MOTALA",
+        "type": "gliding_sector",
+        "from_nm": 103.34285714285714,
+        "to_nm": 108.28333333333333,
+        "frequency": null,
+        "icao_class": "sua",
+        "shelves": [
+          {
+            "restriction": null,
+            "upper": {
+              "unit": "fl",
+              "value": 90,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 1600,
+              "datum": "msl"
+            },
+            "from_nm": 103.34285714285714,
+            "to_nm": 108.28333333333333,
+            "floor_ft": 1600,
+            "ceiling_ft": 9000
+          }
+        ]
+      },
+      {
+        "name": "SKÄRSTAD",
+        "type": "gliding_sector",
+        "from_nm": 105.31904761904762,
+        "to_nm": 108.28333333333333,
+        "frequency": null,
+        "icao_class": "sua",
+        "shelves": [
+          {
+            "restriction": null,
+            "upper": {
+              "unit": "fl",
+              "value": 90,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 1600,
+              "datum": "msl"
+            },
+            "from_nm": 105.31904761904762,
+            "to_nm": 108.28333333333333,
+            "floor_ft": 1600,
+            "ceiling_ft": 9000
+          }
+        ]
+      },
+      {
+        "name": "KARLSBORG TMA",
+        "type": "tma",
+        "from_nm": 109.27142857142857,
+        "to_nm": 119.09333333333333,
+        "frequency": {
+          "label": "Approach",
+          "value": "130.000"
+        },
+        "icao_class": "c",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "fl",
+              "value": 95,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 1700,
+              "datum": "msl"
+            },
+            "from_nm": 109.27142857142857,
+            "to_nm": 119.09333333333333,
+            "floor_ft": 1700,
+            "ceiling_ft": 9500
+          }
+        ]
+      },
+      {
+        "name": "MOTALA VÄST",
+        "type": "gliding_sector",
+        "from_nm": 109.27142857142857,
+        "to_nm": 119.09333333333333,
+        "frequency": null,
+        "icao_class": "sua",
+        "shelves": [
+          {
+            "restriction": null,
+            "upper": {
+              "unit": "fl",
+              "value": 65,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 1700,
+              "datum": "msl"
+            },
+            "from_nm": 109.27142857142857,
+            "to_nm": 119.09333333333333,
+            "floor_ft": 1700,
+            "ceiling_ft": 6500
+          }
+        ]
+      },
+      {
+        "name": "SKÄRSTAD VÄST",
+        "type": "gliding_sector",
+        "from_nm": 109.27142857142857,
+        "to_nm": 112.2357142857143,
+        "frequency": null,
+        "icao_class": "sua",
+        "shelves": [
+          {
+            "restriction": null,
+            "upper": {
+              "unit": "fl",
+              "value": 65,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 1700,
+              "datum": "msl"
+            },
+            "from_nm": 109.27142857142857,
+            "to_nm": 112.2357142857143,
+            "floor_ft": 1700,
+            "ceiling_ft": 6500
+          }
+        ]
+      },
+      {
+        "name": "ES-R22B VÄTTERN",
+        "type": "restricted",
+        "from_nm": 128.82666666666668,
+        "to_nm": 130.77333333333334,
+        "frequency": null,
+        "icao_class": "sua",
+        "shelves": [
+          {
+            "restriction": "restricted",
+            "upper": {
+              "unit": "ft",
+              "value": 4500,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 128.82666666666668,
+            "to_nm": 130.77333333333334,
+            "floor_ft": 0,
+            "ceiling_ft": 4500
+          }
+        ]
+      },
+      {
+        "name": "JÖNKÖPING TMA",
+        "type": "tma",
+        "from_nm": 140.50666666666666,
+        "to_nm": 147.27142857142857,
+        "frequency": null,
+        "icao_class": "c",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "fl",
+              "value": 95,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 4500,
+              "datum": "msl"
+            },
+            "from_nm": 140.50666666666666,
+            "to_nm": 147.27142857142857,
+            "floor_ft": 4500,
+            "ceiling_ft": 9500
+          }
+        ]
+      },
+      {
+        "name": "JÖNKÖPING TMA",
+        "type": "tma",
+        "from_nm": 148.22857142857143,
+        "to_nm": 164.5,
+        "frequency": null,
+        "icao_class": "c",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "fl",
+              "value": 95,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 2200,
+              "datum": "msl"
+            },
+            "from_nm": 148.22857142857143,
+            "to_nm": 164.5,
+            "floor_ft": 2200,
+            "ceiling_ft": 9500
+          }
+        ]
+      },
+      {
+        "name": "JÖNKÖPING CTR",
+        "type": "ctr",
+        "from_nm": 154.92857142857144,
+        "to_nm": 164.5,
+        "frequency": {
+          "label": "Tower",
+          "value": "118.250"
+        },
+        "icao_class": "c",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "ft",
+              "value": 2200,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 154.92857142857144,
+            "to_nm": 164.5,
+            "floor_ft": 0,
+            "ceiling_ft": 2200
+          }
+        ]
+      }
+    ],
+    "checkpoints": [
+      {
+        "name": "Stockholm-Bromma",
+        "type": "departure",
+        "pattern": {
+          "direction": "left",
+          "altitude_ft": 1050,
+          "direction_source": "assumed",
+          "height_agl": 1000
+        },
+        "frequencies": [
+          {
+            "label": "ATIS",
+            "value": "122.450"
+          },
+          {
+            "label": "Ground",
+            "value": "121.600"
+          },
+          {
+            "label": "Tower",
+            "value": "118.100"
+          },
+          {
+            "label": "Approach",
+            "value": "120.150"
+          },
+          {
+            "label": "AFIS",
+            "value": "119.400"
+          }
+        ],
+        "tc": 219,
+        "ident": "ESSB",
+        "waypoint_type": "airport",
+        "waypoint_index": 0,
+        "cumulative_dist": 0,
+        "turn": null,
+        "fuel_remaining": 38.6,
+        "cumulative_ete": "15:00Z",
+        "compass_heading": 215,
+        "leg_dist": 18.1,
+        "lat": 59.354401,
+        "lon": 17.9417,
+        "altitude": 6500,
+        "transponder": "7000",
+        "elevation": 47,
+        "flight_category": "IFR",
+        "metar_summary": "270°/2kt 2.8SM",
+        "navaid_type": null,
+        "cumulative_minutes": 0,
+        "fuel_used": 0,
+        "inbound_heading": null
+      },
+      {
+        "name": "Nyköping",
+        "type": "enroute",
+        "pattern": null,
+        "frequencies": [],
+        "tc": 250,
+        "ident": "",
+        "waypoint_type": "user",
+        "waypoint_index": 2,
+        "cumulative_dist": 46.2,
+        "turn": {
+          "outbound": 242,
+          "direction": "right",
+          "angle": 30
+        },
+        "fuel_remaining": 34.3,
+        "cumulative_ete": "15:28Z",
+        "compass_heading": 242,
+        "leg_dist": 27.5,
+        "lat": 58.753,
+        "lon": 17.00788,
+        "altitude": 6500,
+        "transponder": null,
+        "elevation": null,
+        "flight_category": null,
+        "metar_summary": null,
+        "navaid_type": null,
+        "cumulative_minutes": 28,
+        "fuel_used": 4.3,
+        "inbound_heading": 212
+      },
+      {
+        "name": "Norrköping",
+        "type": "enroute",
+        "pattern": null,
+        "frequencies": [],
+        "tc": 258,
+        "ident": "",
+        "waypoint_type": "user",
+        "waypoint_index": 3,
+        "cumulative_dist": 73.7,
+        "turn": {
+          "outbound": 249,
+          "direction": "right",
+          "angle": 7
+        },
+        "fuel_remaining": 32.1,
+        "cumulative_ete": "15:44Z",
+        "compass_heading": 249,
+        "leg_dist": 41.5,
+        "lat": 58.59419,
+        "lon": 16.1826,
+        "altitude": 6500,
+        "transponder": null,
+        "elevation": null,
+        "flight_category": null,
+        "metar_summary": null,
+        "navaid_type": null,
+        "cumulative_minutes": 44,
+        "fuel_used": 6.5,
+        "inbound_heading": 242
+      },
+      {
+        "name": "Vadstena",
+        "type": "enroute",
+        "pattern": null,
+        "frequencies": [],
+        "tc": 207,
+        "ident": "",
+        "waypoint_type": "user",
+        "waypoint_index": 4,
+        "cumulative_dist": 115.2,
+        "turn": {
+          "outbound": 203,
+          "direction": "left",
+          "angle": 46
+        },
+        "fuel_remaining": 28.7,
+        "cumulative_ete": "16:08Z",
+        "compass_heading": 203,
+        "leg_dist": 29.2,
+        "lat": 58.44863,
+        "lon": 14.88969,
+        "altitude": 6500,
+        "transponder": null,
+        "elevation": null,
+        "flight_category": null,
+        "metar_summary": null,
+        "navaid_type": null,
+        "cumulative_minutes": 68,
+        "fuel_used": 9.9,
+        "inbound_heading": 249
+      },
+      {
+        "name": "Gränna",
+        "type": "enroute",
+        "pattern": null,
+        "frequencies": [],
+        "tc": 219,
+        "ident": "",
+        "waypoint_type": "user",
+        "waypoint_index": 5,
+        "cumulative_dist": 144.4,
+        "turn": {
+          "outbound": 211,
+          "direction": "right",
+          "angle": 8
+        },
+        "fuel_remaining": 26.2,
+        "cumulative_ete": "16:26Z",
+        "compass_heading": 211,
+        "leg_dist": 20.1,
+        "lat": 58.01667,
+        "lon": 14.46667,
+        "altitude": 6500,
+        "transponder": null,
+        "elevation": null,
+        "flight_category": null,
+        "metar_summary": null,
+        "navaid_type": null,
+        "cumulative_minutes": 86,
+        "fuel_used": 12.4,
+        "inbound_heading": 203
+      },
+      {
+        "name": "Jönköping",
+        "type": "destination",
+        "pattern": {
+          "direction": "left",
+          "altitude_ft": 1750,
+          "direction_source": "assumed",
+          "height_agl": 1000
+        },
+        "frequencies": [
+          {
+            "label": "Tower",
+            "value": "118.250"
+          }
+        ],
+        "tc": null,
+        "ident": "ESGJ",
+        "waypoint_type": "airport",
+        "waypoint_index": 6,
+        "cumulative_dist": 164.5,
+        "turn": null,
+        "fuel_remaining": 24.5,
+        "cumulative_ete": "16:38Z",
+        "compass_heading": null,
+        "leg_dist": null,
+        "lat": 57.7576,
+        "lon": 14.0687,
+        "altitude": null,
+        "transponder": null,
+        "elevation": 741,
+        "flight_category": "VFR",
+        "metar_summary": "000°/0kt 6.0SM",
+        "navaid_type": null,
+        "cumulative_minutes": 98,
+        "fuel_used": 14.1,
+        "inbound_heading": 211
+      }
+    ]
+  },
+  "availability": {
+    "terrain": "ok",
+    "weather": {
+      "asked": 2,
+      "answered": 2
+    },
+    "airspace": "covered"
+  },
+  "credits": [
+    {
+      "name": "Leaflet",
+      "url": "https://leafletjs.com/",
+      "credit": "Map library, BSD-2-Clause"
+    },
+    {
+      "name": "MapLibre GL JS",
+      "url": "https://maplibre.org/maplibre-gl-js/docs/",
+      "credit": "Vector map renderer, BSD-3-Clause"
+    },
+    {
+      "name": "maplibre-gl-leaflet",
+      "url": "https://github.com/maplibre/maplibre-gl-leaflet",
+      "credit": "MapLibre-in-Leaflet bridge, ISC"
+    },
+    {
+      "name": "MDEx",
+      "url": "https://github.com/leandrocp/mdex",
+      "credit": "Markdown renderer, MIT"
+    },
+    {
+      "name": "comrak",
+      "url": "https://github.com/kivikakk/comrak",
+      "credit": "CommonMark parser, BSD-2-Clause"
+    },
+    {
+      "name": "OpenFreeMap",
+      "url": "https://openfreemap.org/",
+      "credit": "Street map tiles from OpenMapTiles and OpenStreetMap contributors, ODbL"
+    },
+    {
+      "name": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/copyright",
+      "credit": "Street map tiles, ODbL"
+    },
+    {
+      "name": "OpenTopoMap",
+      "url": "https://opentopomap.org/",
+      "credit": "Terrain map tiles from OpenStreetMap contributors and SRTM, CC-BY-SA"
+    },
+    {
+      "name": "Open Flightmaps",
+      "url": "https://www.openflightmaps.org/",
+      "credit": "European VFR charts, OFMA General Users' License"
+    },
+    {
+      "name": "FAA",
+      "url": "https://www.faa.gov/",
+      "credit": "US VFR sectional charts, public domain"
+    },
+    {
+      "name": "openAIP",
+      "url": "https://www.openaip.net/",
+      "credit": "Airspace, VFR reporting points and the worldwide chart overlay, CC BY-NC 4.0"
+    },
+    {
+      "name": "Aviation Weather Center",
+      "url": "https://aviationweather.gov/",
+      "credit": "METAR data, public domain"
+    },
+    {
+      "name": "MET Norway",
+      "url": "https://api.met.no/doc/License",
+      "credit": "METAR data, CC BY 4.0"
+    },
+    {
+      "name": "NOAA tgftp",
+      "url": "https://tgftp.nws.noaa.gov/",
+      "credit": "METAR data, a US Government work not subject to copyright"
+    },
+    {
+      "name": "NOAA / NCEP GFS",
+      "url": "https://registry.opendata.aws/noaa-gfs-bdp-pds/",
+      "credit": "Winds aloft forecasts, a US Government work not subject to copyright"
+    },
+    {
+      "name": "Open-Meteo",
+      "url": "https://github.com/open-meteo/open-meteo",
+      "credit": "Weather API server, AGPL-3.0 (server), CC BY 4.0 (data)"
+    },
+    {
+      "name": "U.S. Geological Survey",
+      "url": "https://registry.opendata.aws/terrain-tiles/",
+      "credit": "Terrain elevation — SRTM data courtesy of the U.S. Geological Survey, public domain"
+    },
+    {
+      "name": "Natural Earth",
+      "url": "https://www.naturalearthdata.com/",
+      "credit": "Coastlines and lakes, public domain"
+    },
+    {
+      "name": "OurAirports",
+      "url": "https://ourairports.com/",
+      "credit": "Airport database, public domain"
+    },
+    {
+      "name": "GeoNames",
+      "url": "https://www.geonames.org/",
+      "credit": "Landmark gazetteer, CC BY 4.0"
+    },
+    {
+      "name": "NOAA NCEI / BGS",
+      "url": "https://www.ncei.noaa.gov/products/world-magnetic-model",
+      "credit": "World Magnetic Model 2025, a US Government work not subject to copyright"
+    },
+    {
+      "name": "HeroIcons",
+      "url": "https://heroicons.com/",
+      "credit": "Interface icons, MIT"
+    },
+    {
+      "name": "Astigmatic",
+      "url": "https://fonts.google.com/specimen/Just+Another+Hand",
+      "credit": "\"Just Another Hand\" typeface, Apache-2.0"
+    }
+  ]
 }

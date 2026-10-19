@@ -39,7 +39,7 @@
       "unit": "degree"
     },
     "eta": {
-      "convention": "the cell's own text: elapsed time written like an ete (\"1h20\") when no departure time is set, a clock time (\"15:20Z\") when one is. See `elapsed_min` and `arrival` for the figures behind it",
+      "convention": "the cell's own text: elapsed time written like an ete (\"1h20\") when no departure time is set, a clock time (\"15:20Z\") when one is. The figures behind it are `arrivals` in GET /plans/{id}/render",
       "type": "string",
       "unit": "minute"
     },
@@ -143,8 +143,248 @@
       "unit": "knot"
     }
   },
+  "columns": {
+    "columns": [
+      {
+        "label": "Alt.",
+        "type": "single",
+        "group": null,
+        "fields": [
+          "altitude"
+        ],
+        "key": "altitude",
+        "widths": [
+          "6.0106%"
+        ],
+        "align": "leg",
+        "sub_labels": null,
+        "group_label": null
+      },
+      {
+        "label": null,
+        "type": "wind_block",
+        "group": "wind",
+        "fields": [
+          "wind_dir",
+          "wind_vel",
+          "oat"
+        ],
+        "key": "wind",
+        "widths": [
+          "5.284%",
+          "6.2087%"
+        ],
+        "align": "leg",
+        "sub_labels": [
+          [
+            "Dir",
+            "Spd"
+          ],
+          "Temp."
+        ],
+        "group_label": "Wind"
+      },
+      {
+        "label": "TAS",
+        "type": "single",
+        "group": null,
+        "fields": [
+          "tas"
+        ],
+        "key": "tas",
+        "widths": [
+          "5.9445%"
+        ],
+        "align": "leg",
+        "sub_labels": null,
+        "group_label": null
+      },
+      {
+        "label": null,
+        "type": "dual",
+        "group": "course",
+        "fields": [
+          "tc",
+          "wca"
+        ],
+        "key": "tc_wca",
+        "widths": [
+          "6.0106%"
+        ],
+        "align": "leg",
+        "sub_labels": [
+          "TC",
+          "WCA"
+        ],
+        "group_label": "Course"
+      },
+      {
+        "label": null,
+        "type": "dual",
+        "group": "course",
+        "fields": [
+          "th",
+          "var"
+        ],
+        "key": "th_var",
+        "widths": [
+          "5.8785%"
+        ],
+        "align": "leg",
+        "sub_labels": [
+          "TH",
+          "VAR"
+        ],
+        "group_label": "Course"
+      },
+      {
+        "label": null,
+        "type": "dual",
+        "group": "course",
+        "fields": [
+          "mh",
+          "dev"
+        ],
+        "key": "mh_dev",
+        "widths": [
+          "5.8785%"
+        ],
+        "align": "leg",
+        "sub_labels": [
+          "MH",
+          "DEV"
+        ],
+        "group_label": "Course"
+      },
+      {
+        "label": null,
+        "type": "single",
+        "group": "course",
+        "fields": [
+          "compass_heading"
+        ],
+        "key": "compass_heading",
+        "widths": [
+          "5.6803%"
+        ],
+        "align": "leg",
+        "sub_labels": [
+          "CH",
+          null
+        ],
+        "group_label": "Course"
+      },
+      {
+        "label": "Dist.",
+        "type": "dual",
+        "group": null,
+        "fields": [
+          "leg_dist",
+          "remaining_dist"
+        ],
+        "key": "leg_dist",
+        "widths": [
+          "6.2748%"
+        ],
+        "align": "leg",
+        "sub_labels": [
+          "Leg",
+          "Rem."
+        ],
+        "group_label": null
+      },
+      {
+        "label": "GS",
+        "type": "dual",
+        "group": null,
+        "fields": [
+          "gs_est",
+          "gs_act"
+        ],
+        "key": "gs",
+        "widths": [
+          "5.8124%"
+        ],
+        "align": "leg",
+        "sub_labels": [
+          "Est.",
+          "Act."
+        ],
+        "group_label": null
+      },
+      {
+        "label": "ETE",
+        "type": "single",
+        "group": null,
+        "fields": [
+          "ete"
+        ],
+        "key": "ete",
+        "widths": [
+          "4.7556%"
+        ],
+        "align": "leg",
+        "sub_labels": null,
+        "group_label": null
+      },
+      {
+        "label": "Fuel Burn",
+        "type": "single",
+        "group": null,
+        "fields": [
+          "fuel_burn"
+        ],
+        "key": "fuel_burn",
+        "widths": [
+          "5.284%"
+        ],
+        "align": "leg",
+        "sub_labels": null,
+        "group_label": null
+      },
+      {
+        "label": null,
+        "type": "dual",
+        "group": "time",
+        "fields": [
+          "eta",
+          "ata"
+        ],
+        "key": "eta_ata",
+        "widths": [
+          "5.8785%"
+        ],
+        "align": "checkpoint",
+        "sub_labels": [
+          "ETA",
+          "ATA"
+        ],
+        "group_label": "Time"
+      },
+      {
+        "label": null,
+        "type": "dual",
+        "group": "fuel",
+        "fields": [
+          "fuel_remaining",
+          "fuel_act"
+        ],
+        "key": "fuel_rem_act",
+        "widths": [
+          "5.2839%"
+        ],
+        "align": "checkpoint",
+        "sub_labels": [
+          "Rem",
+          "Act"
+        ],
+        "group_label": "Fuel"
+      }
+    ],
+    "checkpoint_width": "19.8151%"
+  },
   "plan": {
-    "id": "00000000-0000-4000-8000-000000000011",
+    "id": "00000000-0000-4000-8000-000000000021",
     "label": null,
     "origin": null,
     "waypoints": [
@@ -949,10 +1189,6 @@
         }
       }
     ],
-    "route_id": "00000000-0000-4000-8000-000000000012",
-    "airac_cycle": "2610",
-    "aircraft_profile_id": "00000000-0000-4000-8000-000000000013",
-    "passed_steps": [],
     "legs": [
       {
         "altitude": {
@@ -2905,6 +3141,40 @@
         }
       }
     ],
+    "flight_info": {
+      "date": {
+        "computed": null,
+        "origin": null,
+        "source": null,
+        "state": null,
+        "suggestion": null,
+        "value": ""
+      },
+      "etd": {
+        "computed": "0",
+        "origin": null,
+        "source": null,
+        "state": "suggested",
+        "suggestion": null,
+        "value": null
+      },
+      "route_name": {
+        "computed": null,
+        "origin": null,
+        "source": null,
+        "state": null,
+        "suggestion": null,
+        "value": ""
+      },
+      "transponder": {
+        "computed": null,
+        "origin": null,
+        "source": null,
+        "state": null,
+        "suggestion": null,
+        "value": ""
+      }
+    },
     "fuel": {
       "climb": {
         "computed": null,
@@ -2987,40 +3257,7 @@
         "value": null
       }
     },
-    "flight_info": {
-      "date": {
-        "computed": null,
-        "origin": null,
-        "source": null,
-        "state": null,
-        "suggestion": null,
-        "value": ""
-      },
-      "etd": {
-        "computed": "0",
-        "origin": null,
-        "source": null,
-        "state": "suggested",
-        "suggestion": null,
-        "value": null
-      },
-      "route_name": {
-        "computed": null,
-        "origin": null,
-        "source": null,
-        "state": null,
-        "suggestion": null,
-        "value": ""
-      },
-      "transponder": {
-        "computed": null,
-        "origin": null,
-        "source": null,
-        "state": null,
-        "suggestion": null,
-        "value": ""
-      }
-    },
+    "route_id": "00000000-0000-4000-8000-000000000022",
     "aircraft": {
       "registration": {
         "computed": null,
@@ -3039,7 +3276,1896 @@
         "value": "C172"
       }
     },
+    "passed_steps": [],
+    "aircraft_profile_id": "00000000-0000-4000-8000-000000000023",
+    "airac_cycle": "2610",
     "working_sheet": false
   },
-  "disclaimer": "FOR FLIGHT SIMULATION USE ONLY — NOT FOR REAL AVIATION"
+  "terrain": {
+    "source": {
+      "max_elevation_ft": 1204,
+      "min_elevation_ft": -43,
+      "resolution": "coarse",
+      "unresolved_cells": 0
+    },
+    "profile_height": 96,
+    "profile_vbox": "0 0 69.70000000000002 96",
+    "total_nm": 69.70000000000002,
+    "y_ceil": 5000,
+    "y_scale": 0.017454545454545455,
+    "sea_level": {
+      "y": 87.27
+    },
+    "ticks": [
+      {
+        "label": "0",
+        "major": true,
+        "length": 6,
+        "y": 87.3
+      },
+      {
+        "label": "",
+        "major": false,
+        "length": 3,
+        "y": 78.5
+      },
+      {
+        "label": "1k",
+        "major": true,
+        "length": 6,
+        "y": 69.8
+      },
+      {
+        "label": "",
+        "major": false,
+        "length": 3,
+        "y": 61.1
+      },
+      {
+        "label": "2k",
+        "major": true,
+        "length": 6,
+        "y": 52.4
+      },
+      {
+        "label": "",
+        "major": false,
+        "length": 3,
+        "y": 43.6
+      },
+      {
+        "label": "3k",
+        "major": true,
+        "length": 6,
+        "y": 34.9
+      },
+      {
+        "label": "",
+        "major": false,
+        "length": 3,
+        "y": 26.2
+      },
+      {
+        "label": "4k",
+        "major": true,
+        "length": 6,
+        "y": 17.5
+      },
+      {
+        "label": "",
+        "major": false,
+        "length": 3,
+        "y": 8.7
+      }
+    ],
+    "polygon_points": "0,96.0 0.0,84.39 1.1,78.23 2.1,88.02 9.3,66.26 15.3,80.69 21.4,82.58 27.6,82.3 33.8,86.64 39.8,85.27 46.0,83.83 52.6,87.22 53.4,87.05 59.0,84.01 62.4,87.15 67.5,86.59 69.7,86.87 69.7,96.0",
+    "flight_profile_points": "0.0,84.39 6.8,43.64 6.8,43.64 20.1,43.64 24.1,26.18 32.7,26.18 36.7,43.64 40.3,43.64 45.0,43.64 49.1,43.64 55.0,43.64 58.2,43.64 59.7,43.64 59.79,43.64 69.7,86.87",
+    "waypoint_distances": [
+      {
+        "ident": "KPOU",
+        "cumulative_nm": 0
+      },
+      {
+        "ident": "",
+        "cumulative_nm": 6.8
+      },
+      {
+        "ident": "",
+        "cumulative_nm": 20.1
+      },
+      {
+        "ident": "",
+        "cumulative_nm": 32.7
+      },
+      {
+        "ident": "",
+        "cumulative_nm": 40.300000000000004
+      },
+      {
+        "ident": "",
+        "cumulative_nm": 45.00000000000001
+      },
+      {
+        "ident": "",
+        "cumulative_nm": 49.10000000000001
+      },
+      {
+        "ident": "",
+        "cumulative_nm": 55.00000000000001
+      },
+      {
+        "ident": "",
+        "cumulative_nm": 58.20000000000001
+      },
+      {
+        "ident": "",
+        "cumulative_nm": 59.70000000000001
+      },
+      {
+        "ident": "KLDJ",
+        "cumulative_nm": 69.70000000000002
+      }
+    ],
+    "msa_lines": [
+      {
+        "y": 68.07,
+        "x1": 0,
+        "x2": 6.8
+      },
+      {
+        "y": 55.85,
+        "x1": 6.8,
+        "x2": 20.1
+      },
+      {
+        "y": 73.31,
+        "x1": 20.1,
+        "x2": 32.7
+      },
+      {
+        "y": 75.05,
+        "x1": 32.7,
+        "x2": 40.3
+      },
+      {
+        "y": 75.05,
+        "x1": 45,
+        "x2": 49.1
+      },
+      {
+        "y": 76.8,
+        "x1": 49.1,
+        "x2": 55
+      },
+      {
+        "y": 75.05,
+        "x1": 58.2,
+        "x2": 59.7
+      },
+      {
+        "y": 76.8,
+        "x1": 59.7,
+        "x2": 69.7
+      }
+    ],
+    "night_rects": [],
+    "airspace_slices": [
+      {
+        "label": "SFC",
+        "priority": 2,
+        "title": "POUGHKEEPSIE CLASS · SFC–2700",
+        "width": 3.89,
+        "y": 40.15,
+        "x": 0,
+        "height": 47.88,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 0,
+        "label_y": 79
+      },
+      {
+        "label": "3000",
+        "priority": 2,
+        "title": "NEW YORK CLASS · 3000–7000",
+        "width": 7.59,
+        "y": 0,
+        "x": 33.65,
+        "height": 34.91,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 48.28,
+        "label_y": 25.9
+      },
+      {
+        "label": "1300",
+        "priority": 2,
+        "title": "NEW YORK CLASS · 1300–7000",
+        "width": 7.9,
+        "y": 0,
+        "x": 42.18,
+        "height": 64.58,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 60.52,
+        "label_y": 55.6
+      },
+      {
+        "label": "1500",
+        "priority": 2,
+        "title": "NEW YORK CLASS · 1500–7000",
+        "width": 1.97,
+        "y": 0,
+        "x": 51.07,
+        "height": 61.09,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 73.27,
+        "label_y": 52.1
+      },
+      {
+        "label": null,
+        "priority": 2,
+        "title": "TETERBORO CLASS · SFC–2500",
+        "width": 0.98,
+        "y": 43.64,
+        "x": 51.07,
+        "height": 43.64,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 73.27,
+        "label_y": 78.3
+      },
+      {
+        "label": "1300",
+        "priority": 2,
+        "title": "NEW YORK CLASS · 1300–7000",
+        "width": 5.68,
+        "y": 0,
+        "x": 54.02,
+        "height": 64.58,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 77.5,
+        "label_y": 55.6
+      },
+      {
+        "label": "SFC",
+        "priority": 2,
+        "title": "NEW YORK CLASS · SFC–7000",
+        "width": 6,
+        "y": 0,
+        "x": 61.7,
+        "height": 87.15,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 88.52,
+        "label_y": 78.2
+      },
+      {
+        "label": null,
+        "priority": 2,
+        "title": "NEW YORK CLASS · 800–7000",
+        "width": 1,
+        "y": 0,
+        "x": 68.7,
+        "height": 73.31,
+        "opacity": 0.14,
+        "fill": "#eab308",
+        "label_left_pct": 98.57,
+        "label_y": 64.3
+      }
+    ],
+    "cloud_elements": [],
+    "altitude_labels": [
+      {
+        "label": "2500",
+        "y": 33.6,
+        "left_pct": 9.76
+      },
+      {
+        "label": "3500",
+        "y": 16.2,
+        "left_pct": 46.92
+      },
+      {
+        "label": "2500",
+        "y": 33.6,
+        "left_pct": 57.82
+      }
+    ],
+    "transition_marks": [
+      {
+        "start_nm": 20.1,
+        "end_nm": 24.1,
+        "at_nm": 20.1
+      },
+      {
+        "start_nm": 32.7,
+        "end_nm": 36.7,
+        "at_nm": 32.7
+      }
+    ]
+  },
+  "disclaimer": "FOR FLIGHT SIMULATION USE ONLY — NOT FOR REAL AVIATION",
+  "arrivals": [
+    {
+      "basis": null,
+      "clock": null,
+      "elapsed_min": 8
+    },
+    {
+      "basis": null,
+      "clock": null,
+      "elapsed_min": 14.166666666666668
+    },
+    {
+      "basis": null,
+      "clock": null,
+      "elapsed_min": 19.833333333333336
+    },
+    {
+      "basis": null,
+      "clock": null,
+      "elapsed_min": 23.333333333333336
+    },
+    {
+      "basis": null,
+      "clock": null,
+      "elapsed_min": 25.666666666666668
+    },
+    {
+      "basis": null,
+      "clock": null,
+      "elapsed_min": 27.666666666666668
+    },
+    {
+      "basis": null,
+      "clock": null,
+      "elapsed_min": 30.5
+    },
+    {
+      "basis": null,
+      "clock": null,
+      "elapsed_min": 32
+    },
+    {
+      "basis": null,
+      "clock": null,
+      "elapsed_min": 32.666666666666664
+    },
+    {
+      "basis": null,
+      "clock": null,
+      "elapsed_min": 37.83333333333333
+    }
+  ],
+  "totals": {
+    "ete": "37:50",
+    "distance_nm": 69.7,
+    "fuel_burn": 5.5,
+    "ete_minutes": 37.83333333333333
+  },
+  "timeline": {
+    "night_spans": [],
+    "flight": {
+      "points": [
+        {
+          "kind": "field",
+          "ft": 165,
+          "nm": 0
+        },
+        {
+          "kind": "ramp",
+          "ft": 2500,
+          "nm": 6.8
+        },
+        {
+          "kind": "level",
+          "ft": 2500,
+          "nm": 6.8
+        },
+        {
+          "kind": "transition",
+          "ft": 2500,
+          "nm": 20.1
+        },
+        {
+          "kind": "transition",
+          "ft": 3500,
+          "nm": 24.1
+        },
+        {
+          "kind": "transition",
+          "ft": 3500,
+          "nm": 32.7
+        },
+        {
+          "kind": "transition",
+          "ft": 2500,
+          "nm": 36.7
+        },
+        {
+          "kind": "level",
+          "ft": 2500,
+          "nm": 40.300000000000004
+        },
+        {
+          "kind": "level",
+          "ft": 2500,
+          "nm": 45.00000000000001
+        },
+        {
+          "kind": "level",
+          "ft": 2500,
+          "nm": 49.10000000000001
+        },
+        {
+          "kind": "level",
+          "ft": 2500,
+          "nm": 55.00000000000001
+        },
+        {
+          "kind": "level",
+          "ft": 2500,
+          "nm": 58.20000000000001
+        },
+        {
+          "kind": "level",
+          "ft": 2500,
+          "nm": 59.70000000000001
+        },
+        {
+          "kind": "ramp",
+          "ft": 2500,
+          "nm": 59.792000000000016
+        },
+        {
+          "kind": "field",
+          "ft": 23,
+          "nm": 69.70000000000002
+        }
+      ],
+      "transitions": [
+        {
+          "start_nm": 20.1,
+          "end_nm": 24.1,
+          "at_nm": 20.1
+        },
+        {
+          "start_nm": 32.7,
+          "end_nm": 36.7,
+          "at_nm": 32.7
+        }
+      ]
+    },
+    "frequency_lanes": [
+      {
+        "name": "NEW YORK STATE CLASS E5",
+        "category": "app",
+        "role": "App",
+        "from_nm": 0,
+        "to_nm": 66.70000000000002,
+        "floor_ft": 1200,
+        "lane": 3,
+        "frequency": {
+          "label": "Approach",
+          "value": "118.000"
+        },
+        "units": [
+          "NEW YORK STATE CLASS E5",
+          "NEW YORK CLASS"
+        ],
+        "left_pct": 10.416666666666668,
+        "right_pct": 86.17587278813964,
+        "bar_right_pct": 86.17587278813964
+      },
+      {
+        "name": "NEWBURGH CLASS E5",
+        "category": "ctr",
+        "role": "Ctr",
+        "from_nm": 0,
+        "to_nm": 13.45,
+        "floor_ft": 0,
+        "lane": 1,
+        "frequency": {
+          "label": "Center",
+          "value": "132.750"
+        },
+        "units": [
+          "NEWBURGH CLASS E5",
+          "POUGHKEEPSIE CLASS",
+          "POUGHKEEPSIE CLASS E2",
+          "POUGHKEEPSIE CLASS E4"
+        ],
+        "left_pct": 10.416666666666668,
+        "right_pct": 32.34722222222222,
+        "bar_right_pct": 25.693448110951692
+      },
+      {
+        "name": "POUGHKEEPSIE CLASS",
+        "category": "twr",
+        "role": "Twr",
+        "from_nm": 0,
+        "to_nm": 3.8857142857142852,
+        "floor_ft": 0,
+        "lane": 0,
+        "frequency": {
+          "label": "Tower",
+          "value": "124.000"
+        },
+        "units": [
+          "POUGHKEEPSIE CLASS"
+        ],
+        "left_pct": 10.416666666666668,
+        "right_pct": 33.05555555555556,
+        "bar_right_pct": 14.830139372822298
+      },
+      {
+        "name": "NEW YORK CLASS E5",
+        "category": "app",
+        "role": "App",
+        "from_nm": 14.399999999999999,
+        "to_nm": 69.70000000000002,
+        "floor_ft": 0,
+        "lane": 2,
+        "frequency": {
+          "label": "Approach",
+          "value": "127.600"
+        },
+        "units": [
+          "NEW YORK CLASS E5",
+          "NEW YORK CLASS",
+          "NEW JERSEY CLASS E5",
+          "TETERBORO CLASS"
+        ],
+        "left_pct": 26.77247728359636,
+        "right_pct": 89.58333333333333,
+        "bar_right_pct": 89.58333333333333
+      }
+    ],
+    "handover_pcts": [
+      26.77247728359636
+    ],
+    "marker_pcts": [
+      10.416666666666668,
+      18.140243902439025,
+      33.24665231946437,
+      47.55798660927785,
+      56.190219990435196,
+      61.52857484457196,
+      66.18543758967,
+      72.88677666188426,
+      76.5214012434242,
+      78.22513151602104,
+      89.58333333333333
+    ],
+    "first_pct": 10.416666666666668,
+    "leg_labels": [
+      {
+        "label": {
+          "distance": "7 NM",
+          "heading": "248°",
+          "gap_pct": 7.723577235772357,
+          "ete": null
+        },
+        "center_pct": 14.278455284552846
+      },
+      {
+        "label": {
+          "distance": "13 NM",
+          "heading": "199°",
+          "gap_pct": 15.106408417025342,
+          "ete": null
+        },
+        "center_pct": 25.693448110951696
+      },
+      {
+        "label": {
+          "distance": "13 NM",
+          "heading": "182°",
+          "gap_pct": 14.31133428981348,
+          "ete": null
+        },
+        "center_pct": 40.402319464371104
+      },
+      {
+        "label": {
+          "distance": "8 NM",
+          "heading": "196°",
+          "gap_pct": 8.632233381157349,
+          "ete": null
+        },
+        "center_pct": 51.87410329985652
+      },
+      {
+        "label": {
+          "distance": "5 NM",
+          "heading": "212°",
+          "gap_pct": 5.338354854136767,
+          "ete": null
+        },
+        "center_pct": 58.85939741750358
+      },
+      {
+        "label": {
+          "distance": "4 NM",
+          "heading": "219°",
+          "gap_pct": 4.656862745098039,
+          "ete": null
+        },
+        "center_pct": 63.85700621712098
+      },
+      {
+        "label": {
+          "distance": "6 NM",
+          "heading": "225°",
+          "gap_pct": 6.701339072214253,
+          "ete": null
+        },
+        "center_pct": 69.53610712577714
+      },
+      {
+        "label": {
+          "distance": "3 NM",
+          "heading": "212°",
+          "gap_pct": 3.6346245815399385,
+          "ete": null
+        },
+        "center_pct": 74.70408895265422
+      },
+      {
+        "label": {
+          "distance": "2 NM",
+          "heading": "223°",
+          "gap_pct": 1.703730272596843,
+          "ete": null
+        },
+        "center_pct": 77.37326637972262
+      },
+      {
+        "label": {
+          "distance": "10 NM",
+          "heading": "260°",
+          "gap_pct": 11.358201817312292,
+          "ete": null
+        },
+        "center_pct": 83.90423242467719
+      }
+    ],
+    "airport_cards": [
+      {
+        "pct": 10.416666666666668,
+        "checkpoint": 0
+      },
+      {
+        "pct": 89.58333333333333,
+        "checkpoint": 1
+      }
+    ],
+    "enroute_labels": [
+      {
+        "name": "WP2",
+        "sub": null,
+        "pct": 18.140243902439025
+      },
+      {
+        "name": "WP3",
+        "sub": null,
+        "pct": 33.24665231946437
+      },
+      {
+        "name": "WP4",
+        "sub": null,
+        "pct": 47.55798660927785
+      },
+      {
+        "name": "WP5",
+        "sub": null,
+        "pct": 56.190219990435196
+      },
+      {
+        "name": "WP6",
+        "sub": null,
+        "pct": 61.52857484457196
+      },
+      {
+        "name": "WP8",
+        "sub": null,
+        "pct": 72.88677666188426
+      },
+      {
+        "name": "WP10",
+        "sub": null,
+        "pct": 78.22513151602104
+      }
+    ],
+    "event_pcts": [],
+    "last_pct": 89.58333333333333,
+    "stat_stacks": [
+      {
+        "heading": null,
+        "fuel": "52 gal",
+        "pct": 10.416666666666668,
+        "eta": "0:00"
+      },
+      {
+        "heading": null,
+        "fuel": "46 gal",
+        "pct": 89.58333333333333,
+        "eta": "37:50"
+      },
+      {
+        "heading": "↰ 199°",
+        "fuel": "51 gal",
+        "pct": 18.140243902439025,
+        "eta": "8:00"
+      },
+      {
+        "heading": "↰ 182°",
+        "fuel": "50 gal",
+        "pct": 33.24665231946437,
+        "eta": "14:10"
+      },
+      {
+        "heading": "↱ 196°",
+        "fuel": "49 gal",
+        "pct": 47.55798660927785,
+        "eta": "19:50"
+      },
+      {
+        "heading": "↱ 212°",
+        "fuel": "48 gal",
+        "pct": 56.190219990435196,
+        "eta": "23:20"
+      },
+      {
+        "heading": "↱ 219°",
+        "fuel": "48 gal",
+        "pct": 61.52857484457196,
+        "eta": "25:40"
+      },
+      {
+        "heading": "↱ 225°",
+        "fuel": "48 gal",
+        "pct": 66.18543758967,
+        "eta": "27:40"
+      },
+      {
+        "heading": "↰ 212°",
+        "fuel": "47 gal",
+        "pct": 72.88677666188426,
+        "eta": "30:30"
+      },
+      {
+        "heading": "↱ 260°",
+        "fuel": "47 gal",
+        "pct": 78.22513151602104,
+        "eta": "32:40"
+      }
+    ],
+    "transition_pcts": [
+      37.78993304638928,
+      52.10126733620277
+    ],
+    "airspace": [
+      {
+        "name": "BOSTON FIR KZBW",
+        "type": "fir",
+        "from_nm": 0,
+        "to_nm": 23.00769230769231,
+        "frequency": null,
+        "icao_class": "sua",
+        "shelves": [
+          {
+            "restriction": null,
+            "upper": {
+              "unit": "fl",
+              "value": 999,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 0,
+            "to_nm": 23.00769230769231,
+            "floor_ft": 0,
+            "ceiling_ft": 99900
+          }
+        ]
+      },
+      {
+        "name": "NEW YORK STATE CLASS E5",
+        "type": "cta",
+        "from_nm": 0,
+        "to_nm": 39.35,
+        "frequency": {
+          "label": "Approach",
+          "value": "118.000"
+        },
+        "icao_class": "e",
+        "shelves": [
+          {
+            "restriction": null,
+            "upper": {
+              "unit": "fl",
+              "value": 600,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 1200,
+              "datum": "gnd"
+            },
+            "from_nm": 0,
+            "to_nm": 39.35,
+            "floor_ft": 1200,
+            "ceiling_ft": 60000
+          }
+        ]
+      },
+      {
+        "name": "NEWBURGH CLASS E5",
+        "type": "cta",
+        "from_nm": 0,
+        "to_nm": 13.45,
+        "frequency": {
+          "label": "Center",
+          "value": "132.750"
+        },
+        "icao_class": "e",
+        "shelves": [
+          {
+            "restriction": null,
+            "upper": {
+              "unit": "fl",
+              "value": 600,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 700,
+              "datum": "gnd"
+            },
+            "from_nm": 0,
+            "to_nm": 13.45,
+            "floor_ft": 700,
+            "ceiling_ft": 60000
+          }
+        ]
+      },
+      {
+        "name": "POUGHKEEPSIE CLASS",
+        "type": "ctr",
+        "from_nm": 0,
+        "to_nm": 3.8857142857142852,
+        "frequency": {
+          "label": "Center",
+          "value": "132.750"
+        },
+        "icao_class": "d",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "ft",
+              "value": 2700,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 0,
+            "to_nm": 3.8857142857142852,
+            "floor_ft": 0,
+            "ceiling_ft": 2700
+          }
+        ]
+      },
+      {
+        "name": "POUGHKEEPSIE CLASS E2",
+        "type": "cta",
+        "from_nm": 0,
+        "to_nm": 3.8857142857142852,
+        "frequency": {
+          "label": "Center",
+          "value": "132.750"
+        },
+        "icao_class": "e",
+        "shelves": [
+          {
+            "restriction": null,
+            "upper": {
+              "unit": "fl",
+              "value": 600,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 0,
+            "to_nm": 3.8857142857142852,
+            "floor_ft": 0,
+            "ceiling_ft": 60000
+          }
+        ]
+      },
+      {
+        "name": "POUGHKEEPSIE CLASS E4",
+        "type": "cta",
+        "from_nm": 4.857142857142857,
+        "to_nm": 5.828571428571428,
+        "frequency": {
+          "label": "Center",
+          "value": "132.750"
+        },
+        "icao_class": "e",
+        "shelves": [
+          {
+            "restriction": null,
+            "upper": {
+              "unit": "fl",
+              "value": 600,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 4.857142857142857,
+            "to_nm": 5.828571428571428,
+            "floor_ft": 0,
+            "ceiling_ft": 60000
+          }
+        ]
+      },
+      {
+        "name": "PNY029",
+        "type": "aerial_sporting",
+        "from_nm": 13.45,
+        "to_nm": 18.2,
+        "frequency": null,
+        "icao_class": "sua",
+        "shelves": [
+          {
+            "restriction": null,
+            "upper": {
+              "unit": "ft",
+              "value": 10000,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 13.45,
+            "to_nm": 18.2,
+            "floor_ft": 0,
+            "ceiling_ft": 10000
+          }
+        ]
+      },
+      {
+        "name": "NEW YORK CLASS E5",
+        "type": "cta",
+        "from_nm": 14.399999999999999,
+        "to_nm": 69.70000000000002,
+        "frequency": {
+          "label": "Approach",
+          "value": "127.600"
+        },
+        "icao_class": "e",
+        "shelves": [
+          {
+            "restriction": null,
+            "upper": {
+              "unit": "fl",
+              "value": 600,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 700,
+              "datum": "gnd"
+            },
+            "from_nm": 14.399999999999999,
+            "to_nm": 69.70000000000002,
+            "floor_ft": 700,
+            "ceiling_ft": 60000
+          }
+        ]
+      },
+      {
+        "name": "R-5206 WEST POINT, NY",
+        "type": "restricted",
+        "from_nm": 17.25,
+        "to_nm": 17.25,
+        "frequency": {
+          "label": "Radio",
+          "value": "126.400"
+        },
+        "icao_class": "sua",
+        "shelves": [
+          {
+            "restriction": "restricted",
+            "upper": {
+              "unit": "ft",
+              "value": 5000,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 17.25,
+            "to_nm": 17.25,
+            "floor_ft": 0,
+            "ceiling_ft": 5000
+          }
+        ]
+      },
+      {
+        "name": "NEW YORK CLASS",
+        "type": "ctr",
+        "from_nm": 33.650000000000006,
+        "to_nm": 41.24,
+        "frequency": {
+          "label": "Approach",
+          "value": "127.600"
+        },
+        "icao_class": "b",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "ft",
+              "value": 7000,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 3000,
+              "datum": "msl"
+            },
+            "from_nm": 33.650000000000006,
+            "to_nm": 41.24,
+            "floor_ft": 3000,
+            "ceiling_ft": 7000
+          }
+        ]
+      },
+      {
+        "name": "NEW JERSEY CLASS E5",
+        "type": "cta",
+        "from_nm": 40.300000000000004,
+        "to_nm": 65.70000000000002,
+        "frequency": {
+          "label": "Approach",
+          "value": "127.600"
+        },
+        "icao_class": "e",
+        "shelves": [
+          {
+            "restriction": null,
+            "upper": {
+              "unit": "fl",
+              "value": 600,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 1200,
+              "datum": "gnd"
+            },
+            "from_nm": 40.300000000000004,
+            "to_nm": 65.70000000000002,
+            "floor_ft": 1200,
+            "ceiling_ft": 60000
+          }
+        ]
+      },
+      {
+        "name": "NEW YORK CLASS",
+        "type": "ctr",
+        "from_nm": 42.18000000000001,
+        "to_nm": 50.08333333333334,
+        "frequency": {
+          "label": "Approach",
+          "value": "118.000"
+        },
+        "icao_class": "b",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "ft",
+              "value": 7000,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 1300,
+              "datum": "msl"
+            },
+            "from_nm": 42.18000000000001,
+            "to_nm": 50.08333333333334,
+            "floor_ft": 1300,
+            "ceiling_ft": 7000
+          }
+        ]
+      },
+      {
+        "name": "NEW YORK CLASS",
+        "type": "ctr",
+        "from_nm": 51.06666666666668,
+        "to_nm": 53.033333333333346,
+        "frequency": {
+          "label": "Approach",
+          "value": "118.000"
+        },
+        "icao_class": "b",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "ft",
+              "value": 7000,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 1500,
+              "datum": "msl"
+            },
+            "from_nm": 51.06666666666668,
+            "to_nm": 53.033333333333346,
+            "floor_ft": 1500,
+            "ceiling_ft": 7000
+          }
+        ]
+      },
+      {
+        "name": "TETERBORO CLASS",
+        "type": "ctr",
+        "from_nm": 51.06666666666668,
+        "to_nm": 52.05000000000001,
+        "frequency": {
+          "label": "Approach",
+          "value": "127.600"
+        },
+        "icao_class": "d",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "ft",
+              "value": 2500,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 51.06666666666668,
+            "to_nm": 52.05000000000001,
+            "floor_ft": 0,
+            "ceiling_ft": 2500
+          }
+        ]
+      },
+      {
+        "name": "NEW YORK CLASS",
+        "type": "ctr",
+        "from_nm": 54.01666666666667,
+        "to_nm": 59.70000000000001,
+        "frequency": {
+          "label": "Approach",
+          "value": "118.000"
+        },
+        "icao_class": "b",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "ft",
+              "value": 7000,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 1300,
+              "datum": "msl"
+            },
+            "from_nm": 54.01666666666667,
+            "to_nm": 59.70000000000001,
+            "floor_ft": 1300,
+            "ceiling_ft": 7000
+          }
+        ]
+      },
+      {
+        "name": "NEW YORK CLASS",
+        "type": "ctr",
+        "from_nm": 60.70000000000001,
+        "to_nm": 60.70000000000001,
+        "frequency": {
+          "label": "Approach",
+          "value": "127.600"
+        },
+        "icao_class": "b",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "ft",
+              "value": 7000,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 500,
+              "datum": "msl"
+            },
+            "from_nm": 60.70000000000001,
+            "to_nm": 60.70000000000001,
+            "floor_ft": 500,
+            "ceiling_ft": 7000
+          }
+        ]
+      },
+      {
+        "name": "NEW YORK CLASS",
+        "type": "ctr",
+        "from_nm": 61.70000000000001,
+        "to_nm": 67.70000000000002,
+        "frequency": {
+          "label": "Approach",
+          "value": "127.600"
+        },
+        "icao_class": "b",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "ft",
+              "value": 7000,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 0,
+              "datum": "gnd"
+            },
+            "from_nm": 61.70000000000001,
+            "to_nm": 67.70000000000002,
+            "floor_ft": 0,
+            "ceiling_ft": 7000
+          }
+        ]
+      },
+      {
+        "name": "NEW YORK STATE CLASS E5",
+        "type": "cta",
+        "from_nm": 66.70000000000002,
+        "to_nm": 66.70000000000002,
+        "frequency": {
+          "label": "Approach",
+          "value": "118.000"
+        },
+        "icao_class": "e",
+        "shelves": [
+          {
+            "restriction": null,
+            "upper": {
+              "unit": "fl",
+              "value": 600,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 1200,
+              "datum": "gnd"
+            },
+            "from_nm": 66.70000000000002,
+            "to_nm": 66.70000000000002,
+            "floor_ft": 1200,
+            "ceiling_ft": 60000
+          }
+        ]
+      },
+      {
+        "name": "NEW JERSEY CLASS E5",
+        "type": "cta",
+        "from_nm": 67.70000000000002,
+        "to_nm": 69.70000000000002,
+        "frequency": {
+          "label": "Approach",
+          "value": "127.600"
+        },
+        "icao_class": "e",
+        "shelves": [
+          {
+            "restriction": null,
+            "upper": {
+              "unit": "fl",
+              "value": 600,
+              "datum": "std"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 1200,
+              "datum": "gnd"
+            },
+            "from_nm": 67.70000000000002,
+            "to_nm": 69.70000000000002,
+            "floor_ft": 1200,
+            "ceiling_ft": 60000
+          }
+        ]
+      },
+      {
+        "name": "NEW YORK CLASS",
+        "type": "ctr",
+        "from_nm": 68.70000000000002,
+        "to_nm": 69.70000000000002,
+        "frequency": {
+          "label": "Approach",
+          "value": "135.350"
+        },
+        "icao_class": "b",
+        "shelves": [
+          {
+            "restriction": "comms",
+            "upper": {
+              "unit": "ft",
+              "value": 7000,
+              "datum": "msl"
+            },
+            "lower": {
+              "unit": "ft",
+              "value": 800,
+              "datum": "msl"
+            },
+            "from_nm": 68.70000000000002,
+            "to_nm": 69.70000000000002,
+            "floor_ft": 800,
+            "ceiling_ft": 7000
+          }
+        ]
+      }
+    ],
+    "checkpoints": [
+      {
+        "name": "Dutchess County Airport",
+        "type": "departure",
+        "pattern": {
+          "direction": "left",
+          "altitude_ft": 1150,
+          "direction_source": "assumed",
+          "height_agl": 1000
+        },
+        "frequencies": [
+          {
+            "label": "ASOS",
+            "value": "126.750"
+          },
+          {
+            "label": "ATIS",
+            "value": "126.750"
+          },
+          {
+            "label": "Ground",
+            "value": "121.800"
+          },
+          {
+            "label": "Tower",
+            "value": "124.000"
+          },
+          {
+            "label": "Center",
+            "value": "132.750"
+          },
+          {
+            "label": "CLD",
+            "value": "121.800"
+          },
+          {
+            "label": "CTAF",
+            "value": "124.000"
+          },
+          {
+            "label": "RDO",
+            "value": "122.200"
+          },
+          {
+            "label": "UNIC",
+            "value": "122.950"
+          }
+        ],
+        "tc": 222,
+        "ident": "KPOU",
+        "waypoint_type": "airport",
+        "waypoint_index": 0,
+        "cumulative_dist": 0,
+        "turn": null,
+        "fuel_remaining": 51.8,
+        "cumulative_ete": "0:00",
+        "compass_heading": 248,
+        "leg_dist": 6.8,
+        "lat": 41.6265983581543,
+        "lon": -73.88420104980469,
+        "altitude": 2500,
+        "transponder": "",
+        "elevation": 165,
+        "flight_category": "VFR",
+        "metar_summary": "000°/0kt 10.0SM",
+        "navaid_type": null,
+        "cumulative_minutes": 0,
+        "fuel_used": 0,
+        "inbound_heading": null
+      },
+      {
+        "name": "",
+        "type": "enroute",
+        "pattern": null,
+        "frequencies": [],
+        "tc": 181,
+        "ident": "",
+        "waypoint_type": "user",
+        "waypoint_index": 1,
+        "cumulative_dist": 6.8,
+        "turn": {
+          "outbound": 199,
+          "direction": "left",
+          "angle": 49
+        },
+        "fuel_remaining": 50.5,
+        "cumulative_ete": "8:00",
+        "compass_heading": 199,
+        "leg_dist": 13.3,
+        "lat": 41.54243757019517,
+        "lon": -73.98462755086793,
+        "altitude": 2500,
+        "transponder": null,
+        "elevation": null,
+        "flight_category": null,
+        "metar_summary": null,
+        "navaid_type": null,
+        "cumulative_minutes": 8,
+        "fuel_used": 1.3,
+        "inbound_heading": 248
+      },
+      {
+        "name": "",
+        "type": "enroute",
+        "pattern": null,
+        "frequencies": [],
+        "tc": 164,
+        "ident": "",
+        "waypoint_type": "user",
+        "waypoint_index": 2,
+        "cumulative_dist": 20.1,
+        "turn": {
+          "outbound": 182,
+          "direction": "left",
+          "angle": 17
+        },
+        "fuel_remaining": 49.6,
+        "cumulative_ete": "14:10",
+        "compass_heading": 182,
+        "leg_dist": 12.6,
+        "lat": 41.32053368359343,
+        "lon": -73.98805223719067,
+        "altitude": 3500,
+        "transponder": null,
+        "elevation": null,
+        "flight_category": null,
+        "metar_summary": null,
+        "navaid_type": null,
+        "cumulative_minutes": 14.166666666666668,
+        "fuel_used": 2.2,
+        "inbound_heading": 199
+      },
+      {
+        "name": "",
+        "type": "enroute",
+        "pattern": null,
+        "frequencies": [],
+        "tc": 178,
+        "ident": "",
+        "waypoint_type": "user",
+        "waypoint_index": 3,
+        "cumulative_dist": 32.7,
+        "turn": {
+          "outbound": 196,
+          "direction": "right",
+          "angle": 14
+        },
+        "fuel_remaining": 48.8,
+        "cumulative_ete": "19:50",
+        "compass_heading": 196,
+        "leg_dist": 7.6,
+        "lat": 41.118973048348984,
+        "lon": -73.90905631863498,
+        "altitude": 2500,
+        "transponder": null,
+        "elevation": null,
+        "flight_category": null,
+        "metar_summary": null,
+        "navaid_type": null,
+        "cumulative_minutes": 19.833333333333336,
+        "fuel_used": 3,
+        "inbound_heading": 182
+      },
+      {
+        "name": "",
+        "type": "enroute",
+        "pattern": null,
+        "frequencies": [],
+        "tc": 193,
+        "ident": "",
+        "waypoint_type": "user",
+        "waypoint_index": 4,
+        "cumulative_dist": 40.300000000000004,
+        "turn": {
+          "outbound": 212,
+          "direction": "right",
+          "angle": 16
+        },
+        "fuel_remaining": 48.3,
+        "cumulative_ete": "23:20",
+        "compass_heading": 212,
+        "leg_dist": 4.7,
+        "lat": 40.99203405275978,
+        "lon": -73.90287402935671,
+        "altitude": 2500,
+        "transponder": null,
+        "elevation": null,
+        "flight_category": null,
+        "metar_summary": null,
+        "navaid_type": null,
+        "cumulative_minutes": 23.333333333333336,
+        "fuel_used": 3.5,
+        "inbound_heading": 196
+      },
+      {
+        "name": "",
+        "type": "enroute",
+        "pattern": null,
+        "frequencies": [],
+        "tc": 200,
+        "ident": "",
+        "waypoint_type": "user",
+        "waypoint_index": 5,
+        "cumulative_dist": 45.00000000000001,
+        "turn": {
+          "outbound": 219,
+          "direction": "right",
+          "angle": 7
+        },
+        "fuel_remaining": 48,
+        "cumulative_ete": "25:40",
+        "compass_heading": 219,
+        "leg_dist": 4.1,
+        "lat": 40.91569748304102,
+        "lon": -73.92681444916943,
+        "altitude": 2500,
+        "transponder": null,
+        "elevation": null,
+        "flight_category": null,
+        "metar_summary": null,
+        "navaid_type": null,
+        "cumulative_minutes": 25.666666666666668,
+        "fuel_used": 3.8,
+        "inbound_heading": 212
+      },
+      {
+        "name": "",
+        "type": "enroute",
+        "pattern": null,
+        "frequencies": [],
+        "tc": 207,
+        "ident": "",
+        "waypoint_type": "user",
+        "waypoint_index": 6,
+        "cumulative_dist": 49.10000000000001,
+        "turn": {
+          "outbound": 225,
+          "direction": "right",
+          "angle": 6
+        },
+        "fuel_remaining": 47.7,
+        "cumulative_ete": "27:40",
+        "compass_heading": 225,
+        "leg_dist": 5.9,
+        "lat": 40.85229036179555,
+        "lon": -73.95771521904042,
+        "altitude": 2500,
+        "transponder": null,
+        "elevation": null,
+        "flight_category": null,
+        "metar_summary": null,
+        "navaid_type": null,
+        "cumulative_minutes": 27.666666666666668,
+        "fuel_used": 4.1,
+        "inbound_heading": 219
+      },
+      {
+        "name": "",
+        "type": "enroute",
+        "pattern": null,
+        "frequencies": [],
+        "tc": 194,
+        "ident": "",
+        "waypoint_type": "user",
+        "waypoint_index": 7,
+        "cumulative_dist": 55.00000000000001,
+        "turn": {
+          "outbound": 212,
+          "direction": "left",
+          "angle": 13
+        },
+        "fuel_remaining": 47.3,
+        "cumulative_ete": "30:30",
+        "compass_heading": 212,
+        "leg_dist": 3.2,
+        "lat": 40.765040487524416,
+        "lon": -74.0154009497013,
+        "altitude": 2500,
+        "transponder": null,
+        "elevation": null,
+        "flight_category": null,
+        "metar_summary": null,
+        "navaid_type": null,
+        "cumulative_minutes": 30.5,
+        "fuel_used": 4.5,
+        "inbound_heading": 225
+      },
+      {
+        "name": "",
+        "type": "enroute",
+        "pattern": null,
+        "frequencies": [],
+        "tc": 205,
+        "ident": "",
+        "waypoint_type": "user",
+        "waypoint_index": 8,
+        "cumulative_dist": 58.20000000000001,
+        "turn": {
+          "outbound": 223,
+          "direction": "right",
+          "angle": 11
+        },
+        "fuel_remaining": 47.1,
+        "cumulative_ete": "32:00",
+        "compass_heading": 223,
+        "leg_dist": 1.5,
+        "lat": 40.71251245977892,
+        "lon": -74.03204390645335,
+        "altitude": 2500,
+        "transponder": null,
+        "elevation": null,
+        "flight_category": null,
+        "metar_summary": null,
+        "navaid_type": null,
+        "cumulative_minutes": 32,
+        "fuel_used": 4.7,
+        "inbound_heading": 212
+      },
+      {
+        "name": "",
+        "type": "enroute",
+        "pattern": null,
+        "frequencies": [],
+        "tc": 244,
+        "ident": "",
+        "waypoint_type": "user",
+        "waypoint_index": 9,
+        "cumulative_dist": 59.70000000000001,
+        "turn": {
+          "outbound": 260,
+          "direction": "right",
+          "angle": 37
+        },
+        "fuel_remaining": 47,
+        "cumulative_ete": "32:40",
+        "compass_heading": 260,
+        "leg_dist": 10,
+        "lat": 40.68996032211076,
+        "lon": -74.0457974119618,
+        "altitude": 2500,
+        "transponder": null,
+        "elevation": null,
+        "flight_category": null,
+        "metar_summary": null,
+        "navaid_type": null,
+        "cumulative_minutes": 32.666666666666664,
+        "fuel_used": 4.8,
+        "inbound_heading": 223
+      },
+      {
+        "name": "Linden Airport",
+        "type": "destination",
+        "pattern": {
+          "direction": "left",
+          "altitude_ft": 1000,
+          "direction_source": "assumed",
+          "height_agl": 1000
+        },
+        "frequencies": [
+          {
+            "label": "Approach",
+            "value": "135.350"
+          },
+          {
+            "label": "Departure",
+            "value": "119.200"
+          },
+          {
+            "label": "CLD",
+            "value": "128.350"
+          },
+          {
+            "label": "UNIC",
+            "value": "123.000"
+          }
+        ],
+        "tc": null,
+        "ident": "KLDJ",
+        "waypoint_type": "airport",
+        "waypoint_index": 10,
+        "cumulative_dist": 69.70000000000002,
+        "turn": null,
+        "fuel_remaining": 46.3,
+        "cumulative_ete": "37:50",
+        "compass_heading": null,
+        "leg_dist": null,
+        "lat": 40.617401123,
+        "lon": -74.2445983887,
+        "altitude": null,
+        "transponder": null,
+        "elevation": 23,
+        "flight_category": "VFR",
+        "metar_summary": "000°/0kt 10.0SM",
+        "navaid_type": null,
+        "cumulative_minutes": 37.83333333333333,
+        "fuel_used": 5.5,
+        "inbound_heading": 260
+      }
+    ]
+  },
+  "availability": {
+    "terrain": "ok",
+    "weather": {
+      "asked": 2,
+      "answered": 2
+    },
+    "airspace": "covered"
+  },
+  "credits": [
+    {
+      "name": "Leaflet",
+      "url": "https://leafletjs.com/",
+      "credit": "Map library, BSD-2-Clause"
+    },
+    {
+      "name": "MapLibre GL JS",
+      "url": "https://maplibre.org/maplibre-gl-js/docs/",
+      "credit": "Vector map renderer, BSD-3-Clause"
+    },
+    {
+      "name": "maplibre-gl-leaflet",
+      "url": "https://github.com/maplibre/maplibre-gl-leaflet",
+      "credit": "MapLibre-in-Leaflet bridge, ISC"
+    },
+    {
+      "name": "MDEx",
+      "url": "https://github.com/leandrocp/mdex",
+      "credit": "Markdown renderer, MIT"
+    },
+    {
+      "name": "comrak",
+      "url": "https://github.com/kivikakk/comrak",
+      "credit": "CommonMark parser, BSD-2-Clause"
+    },
+    {
+      "name": "OpenFreeMap",
+      "url": "https://openfreemap.org/",
+      "credit": "Street map tiles from OpenMapTiles and OpenStreetMap contributors, ODbL"
+    },
+    {
+      "name": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/copyright",
+      "credit": "Street map tiles, ODbL"
+    },
+    {
+      "name": "OpenTopoMap",
+      "url": "https://opentopomap.org/",
+      "credit": "Terrain map tiles from OpenStreetMap contributors and SRTM, CC-BY-SA"
+    },
+    {
+      "name": "Open Flightmaps",
+      "url": "https://www.openflightmaps.org/",
+      "credit": "European VFR charts, OFMA General Users' License"
+    },
+    {
+      "name": "FAA",
+      "url": "https://www.faa.gov/",
+      "credit": "US VFR sectional charts, public domain"
+    },
+    {
+      "name": "openAIP",
+      "url": "https://www.openaip.net/",
+      "credit": "Airspace, VFR reporting points and the worldwide chart overlay, CC BY-NC 4.0"
+    },
+    {
+      "name": "Aviation Weather Center",
+      "url": "https://aviationweather.gov/",
+      "credit": "METAR data, public domain"
+    },
+    {
+      "name": "MET Norway",
+      "url": "https://api.met.no/doc/License",
+      "credit": "METAR data, CC BY 4.0"
+    },
+    {
+      "name": "NOAA tgftp",
+      "url": "https://tgftp.nws.noaa.gov/",
+      "credit": "METAR data, a US Government work not subject to copyright"
+    },
+    {
+      "name": "NOAA / NCEP GFS",
+      "url": "https://registry.opendata.aws/noaa-gfs-bdp-pds/",
+      "credit": "Winds aloft forecasts, a US Government work not subject to copyright"
+    },
+    {
+      "name": "Open-Meteo",
+      "url": "https://github.com/open-meteo/open-meteo",
+      "credit": "Weather API server, AGPL-3.0 (server), CC BY 4.0 (data)"
+    },
+    {
+      "name": "U.S. Geological Survey",
+      "url": "https://registry.opendata.aws/terrain-tiles/",
+      "credit": "Terrain elevation — SRTM data courtesy of the U.S. Geological Survey, public domain"
+    },
+    {
+      "name": "Natural Earth",
+      "url": "https://www.naturalearthdata.com/",
+      "credit": "Coastlines and lakes, public domain"
+    },
+    {
+      "name": "OurAirports",
+      "url": "https://ourairports.com/",
+      "credit": "Airport database, public domain"
+    },
+    {
+      "name": "GeoNames",
+      "url": "https://www.geonames.org/",
+      "credit": "Landmark gazetteer, CC BY 4.0"
+    },
+    {
+      "name": "NOAA NCEI / BGS",
+      "url": "https://www.ncei.noaa.gov/products/world-magnetic-model",
+      "credit": "World Magnetic Model 2025, a US Government work not subject to copyright"
+    },
+    {
+      "name": "HeroIcons",
+      "url": "https://heroicons.com/",
+      "credit": "Interface icons, MIT"
+    },
+    {
+      "name": "Astigmatic",
+      "url": "https://fonts.google.com/specimen/Just+Another+Hand",
+      "credit": "\"Just Another Hand\" typeface, Apache-2.0"
+    }
+  ]
 }
