@@ -1,0 +1,4 @@
+# Written by tools, kept byte-for-byte as they write them, so a re-pull or a
+# regenerated fixture diffs only where the data changed.
+contract/
+fixtures/*.json
