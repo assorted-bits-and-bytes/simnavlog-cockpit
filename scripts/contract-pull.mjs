@@ -17,5 +17,20 @@ if (!document.components?.schemas?.RenderResponse) {
   throw new Error(`${url} has no RenderResponse schema: is the server older than #201?`);
 }
 
-writeFileSync("contract/openapi.json", JSON.stringify(document, null, 2) + "\n");
+writeFileSync("contract/openapi.json", JSON.stringify(canonical(document), null, 2) + "\n");
+// Object keys sorted at every depth. The server builds this document from
+// Elixir maps, whose key order is not part of the contract and can differ
+// between its builds; without this, a pull would diff where nothing changed.
+function canonical(value) {
+  if (Array.isArray(value)) return value.map(canonical);
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.keys(value)
+        .sort()
+        .map((key) => [key, canonical(value[key])])
+    );
+  }
+  return value;
+}
+
 console.log(`contract/openapi.json: OpenAPI ${document.openapi} from ${url}`);

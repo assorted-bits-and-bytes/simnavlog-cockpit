@@ -1,46 +1,20 @@
 {
   "components": {
     "schemas": {
-      "PlanResponse": {
+      "Aircraft": {
         "properties": {
-          "disclaimer": {
-            "type": "string"
+          "registration": {
+            "$ref": "#/components/schemas/Field",
+            "title": "registration"
           },
-          "fields": {
-            "additionalProperties": {
-              "type": "object"
-            },
-            "description": "Each field's unit, type and, where a wrong guess is expensive, its sign convention -- once per response rather than on every field object. `var` is positive WEST, the opposite of the WMM convention.",
-            "type": "object"
-          },
-          "plan": {
-            "$ref": "#/components/schemas/Plan"
+          "type": {
+            "$ref": "#/components/schemas/Field",
+            "title": "type"
           }
         },
         "required": [
-          "plan",
-          "fields",
-          "disclaimer"
-        ],
-        "type": "object"
-      },
-      "Credit": {
-        "description": "One data source, credited as the nav log's footer credits it.",
-        "properties": {
-          "credit": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "credit",
-          "name",
-          "url"
+          "registration",
+          "type"
         ],
         "type": "object"
       },
@@ -77,66 +51,402 @@
         ],
         "type": "object"
       },
-      "RenderCheckpoint": {
-        "description": "One checkpoint on the timeline, with what its card shows.",
+      "CockpitPlan": {
+        "description": "The plan a paired cockpit shows, and which rule chose it.",
         "properties": {
-          "altitude": {},
-          "compass_heading": {},
-          "cumulative_dist": {},
-          "cumulative_ete": {},
-          "cumulative_minutes": {},
-          "elevation": {},
-          "flight_category": {},
-          "frequencies": {
+          "binding": {
+            "description": "`explicit` -- the pilot sent this plan with \"Send to sim\". `last_touched` -- nothing was sent, so this is their most recently updated plan. Show which: a default that says so is not ambient.",
+            "enum": [
+              "explicit",
+              "last_touched"
+            ],
+            "type": "string"
+          },
+          "disclaimer": {
+            "type": "string"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/PlanSummary"
+          },
+          "plan_id": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "plan_id",
+          "binding",
+          "plan",
+          "disclaimer"
+        ],
+        "type": "object"
+      },
+      "ConditionsResponse": {
+        "properties": {
+          "conditions": {
             "items": {
-              "$ref": "#/components/schemas/Frequency"
+              "$ref": "#/components/schemas/FieldConditions"
             },
             "type": "array"
           },
-          "fuel_remaining": {},
-          "fuel_used": {},
-          "ident": {},
-          "inbound_heading": {},
-          "lat": {},
-          "leg_dist": {},
-          "lon": {},
-          "metar_summary": {},
-          "name": {},
-          "navaid_type": {},
-          "pattern": {},
-          "tc": {},
-          "transponder": {},
-          "turn": {},
-          "type": {},
-          "waypoint_index": {},
-          "waypoint_type": {}
+          "disclaimer": {
+            "type": "string"
+          }
         },
         "required": [
-          "altitude",
-          "compass_heading",
-          "cumulative_dist",
-          "cumulative_ete",
-          "cumulative_minutes",
-          "elevation",
-          "flight_category",
-          "frequencies",
-          "fuel_remaining",
-          "fuel_used",
-          "ident",
-          "inbound_heading",
-          "lat",
-          "leg_dist",
-          "lon",
-          "metar_summary",
+          "conditions",
+          "disclaimer"
+        ],
+        "type": "object"
+      },
+      "Credit": {
+        "description": "One data source, credited as the nav log's footer credits it.",
+        "properties": {
+          "credit": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "credit",
           "name",
-          "navaid_type",
-          "pattern",
-          "tc",
-          "transponder",
-          "turn",
-          "type",
-          "waypoint_index",
-          "waypoint_type"
+          "url"
+        ],
+        "type": "object"
+      },
+      "Error": {
+        "properties": {
+          "error": {
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "details": {
+                "items": {
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "message": {
+                "type": "string"
+              },
+              "status": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "status",
+              "code",
+              "message",
+              "details"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "type": "object"
+      },
+      "Field": {
+        "description": "One field, always the same shape: what the pilot entered, and every slot behind it. `value` is null for a `suggested` field -- the number there is the calculator's own offer, not theirs.",
+        "properties": {
+          "computed": {
+            "description": "What the engine derived. Read-only."
+          },
+          "origin": {
+            "description": "Which reading it came from.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "source": {
+            "description": "Who authored the offer.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "state": {
+            "description": "Read this, not the value, to learn whether a write landed.",
+            "enum": [
+              "suggested",
+              "confirmed",
+              "stale",
+              "invalid",
+              null
+            ],
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "suggestion": {
+            "description": "A value offered from outside the engine."
+          },
+          "value": {
+            "description": "The pilot's entry."
+          }
+        },
+        "required": [
+          "value",
+          "computed",
+          "suggestion",
+          "state",
+          "source",
+          "origin"
+        ],
+        "type": "object"
+      },
+      "FieldConditions": {
+        "description": "One airport on the route. Either the figures and the station they came from, or `absent` saying why there are none -- never a guessed number.",
+        "properties": {
+          "absent": {
+            "description": "Why there are no figures. Present only when there are none.",
+            "type": "string"
+          },
+          "density_altitude": {
+            "description": "Absent when the report carries no temperature.",
+            "type": [
+              "integer",
+              "null"
+            ],
+            "x-unit": "ft"
+          },
+          "field_elevation": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "x-unit": "ft"
+          },
+          "ident": {
+            "type": "string"
+          },
+          "isa_deviation_c": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "x-unit": "degrees C"
+          },
+          "oat_c": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "x-unit": "degrees C"
+          },
+          "pressure_altitude": {
+            "type": "integer",
+            "x-unit": "ft"
+          },
+          "qnh_hpa": {
+            "type": "number",
+            "x-unit": "hPa"
+          },
+          "station": {
+            "description": "Whose report this is. `distance_nm` of 0 is the airport's own; anything else is borrowed, and from how far.",
+            "properties": {
+              "bearing": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "x-unit": "degrees true"
+              },
+              "distance_nm": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "observed_at": {
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "ident",
+          "field_elevation",
+          "station"
+        ],
+        "type": "object"
+      },
+      "FlightInfo": {
+        "properties": {
+          "date": {
+            "$ref": "#/components/schemas/Field",
+            "title": "date"
+          },
+          "etd": {
+            "$ref": "#/components/schemas/Field",
+            "title": "etd"
+          },
+          "route_name": {
+            "$ref": "#/components/schemas/Field",
+            "title": "route name"
+          },
+          "transponder": {
+            "$ref": "#/components/schemas/Field",
+            "title": "transponder"
+          }
+        },
+        "required": [
+          "date",
+          "etd",
+          "route_name",
+          "transponder"
+        ],
+        "type": "object"
+      },
+      "Frequency": {
+        "description": "A labelled radio frequency.",
+        "properties": {
+          "label": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "x-unit": "MHz"
+          }
+        },
+        "required": [
+          "label",
+          "value"
+        ],
+        "type": "object"
+      },
+      "Fuel": {
+        "properties": {
+          "climb": {
+            "$ref": "#/components/schemas/Field",
+            "description": "gallons for the climb phase — the rate beside it is climb_gph",
+            "title": "climb fuel",
+            "x-unit": "gallon"
+          },
+          "climb_gph": {
+            "$ref": "#/components/schemas/Field",
+            "description": "the plan's own climb rate, seeded from the aircraft profile's climb_gph and written by the pilot; every leg up to the TOC burns at it",
+            "title": "climb burn rate",
+            "x-range": {
+              "maximum": 200,
+              "minimum": 0
+            },
+            "x-unit": "gallon_per_hour"
+          },
+          "cruise": {
+            "$ref": "#/components/schemas/Field",
+            "description": "gallons for the cruise phase — the rate beside it is cruise_gph",
+            "title": "cruise fuel",
+            "x-unit": "gallon"
+          },
+          "cruise_gph": {
+            "$ref": "#/components/schemas/Field",
+            "description": "the plan's own cruise rate, seeded from the aircraft profile's cruise_gph and written by the pilot; every leg after the TOC burns at it",
+            "title": "cruise burn rate",
+            "x-range": {
+              "maximum": 200,
+              "minimum": 0
+            },
+            "x-unit": "gallon_per_hour"
+          },
+          "fuel_available": {
+            "$ref": "#/components/schemas/Field",
+            "title": "usable fuel",
+            "x-unit": "gallon"
+          },
+          "reserves": {
+            "$ref": "#/components/schemas/Field",
+            "title": "reserve fuel",
+            "x-unit": "gallon"
+          },
+          "reserves_gph": {
+            "$ref": "#/components/schemas/Field",
+            "description": "the rate the reserve is counted at — cruise_gph unless the pilot says otherwise",
+            "title": "reserve burn rate",
+            "x-range": {
+              "maximum": 200,
+              "minimum": 0
+            },
+            "x-unit": "gallon_per_hour"
+          },
+          "reserves_minutes": {
+            "$ref": "#/components/schemas/Field",
+            "description": "minutes of reserve to hold back; 45 unless the whole flight lands in daylight",
+            "title": "reserve duration",
+            "x-range": {
+              "maximum": 600,
+              "minimum": 0
+            },
+            "x-unit": "minute"
+          },
+          "run_up_taxi_takeoff": {
+            "$ref": "#/components/schemas/Field",
+            "title": "run-up, taxi and take-off fuel",
+            "x-unit": "gallon"
+          },
+          "total": {
+            "$ref": "#/components/schemas/Field",
+            "title": "total fuel",
+            "x-unit": "gallon"
+          }
+        },
+        "required": [
+          "climb",
+          "climb_gph",
+          "cruise",
+          "cruise_gph",
+          "fuel_available",
+          "reserves",
+          "reserves_gph",
+          "reserves_minutes",
+          "run_up_taxi_takeoff",
+          "total"
+        ],
+        "type": "object"
+      },
+      "FuelResponse": {
+        "properties": {
+          "disclaimer": {
+            "type": "string"
+          },
+          "fields": {
+            "additionalProperties": {
+              "type": "object"
+            },
+            "description": "Each field's unit, type and, where a wrong guess is expensive, its sign convention -- once per response rather than on every field object. `var` is positive WEST, the opposite of the WMM convention.",
+            "type": "object"
+          },
+          "fuel": {
+            "$ref": "#/components/schemas/Fuel"
+          }
+        },
+        "required": [
+          "fuel",
+          "fields",
+          "disclaimer"
         ],
         "type": "object"
       },
@@ -329,79 +639,33 @@
           }
         },
         "required": [
-          "var",
-          "dev",
-          "tc",
-          "ete",
-          "eta",
-          "fuel_remaining",
-          "compass_heading",
-          "leg_dist",
           "altitude",
           "altitude_change_at",
-          "wind_dir",
-          "wind_vel",
-          "fuel_burn",
-          "oat",
-          "tas",
-          "wca",
-          "remaining_dist",
+          "ata",
+          "compass_heading",
+          "dev",
+          "eta",
+          "ete",
           "fuel_act",
+          "fuel_burn",
+          "fuel_remaining",
           "gs_act",
           "gs_est",
+          "leg_dist",
           "mh",
+          "oat",
+          "remaining_dist",
+          "tas",
+          "tc",
           "th",
-          "ata"
+          "var",
+          "wca",
+          "wind_dir",
+          "wind_vel"
         ],
         "type": "object"
       },
-      "Error": {
-        "properties": {
-          "error": {
-            "properties": {
-              "code": {
-                "type": "string"
-              },
-              "details": {
-                "items": {
-                  "type": "object"
-                },
-                "type": "array"
-              },
-              "message": {
-                "type": "string"
-              },
-              "status": {
-                "type": "integer"
-              }
-            },
-            "required": [
-              "status",
-              "code",
-              "message",
-              "details"
-            ],
-            "type": "object"
-          }
-        },
-        "required": [
-          "error"
-        ],
-        "type": "object"
-      },
-      "PollBody": {
-        "description": "The secret from `POST /panel/pair`.",
-        "properties": {
-          "poll_token": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "poll_token"
-        ],
-        "type": "object"
-      },
-      "WaypointsResponse": {
+      "LegsResponse": {
         "properties": {
           "disclaimer": {
             "type": "string"
@@ -413,34 +677,95 @@
             "description": "Each field's unit, type and, where a wrong guess is expensive, its sign convention -- once per response rather than on every field object. `var` is positive WEST, the opposite of the WMM convention.",
             "type": "object"
           },
-          "waypoints": {
+          "legs": {
             "items": {
-              "$ref": "#/components/schemas/Waypoint"
+              "$ref": "#/components/schemas/Leg"
             },
             "type": "array"
           }
         },
         "required": [
-          "waypoints",
+          "legs",
           "fields",
           "disclaimer"
         ],
         "type": "object"
       },
-      "Aircraft": {
+      "OpenApiDocument": {
+        "description": "This document.",
+        "type": "object"
+      },
+      "PairResponse": {
+        "description": "A pairing in flight: what to show, and what to poll with.",
         "properties": {
-          "registration": {
-            "$ref": "#/components/schemas/Field",
-            "title": "registration"
+          "code": {
+            "description": "Six characters for the panel to display, hyphenated. Drawn from Crockford Base32, so it carries no I, L, O or U -- the glyphs a pilot misreads through a headset.",
+            "example": "K7Q-4R2",
+            "type": "string"
           },
-          "type": {
-            "$ref": "#/components/schemas/Field",
-            "title": "type"
+          "expires_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "poll_after_ms": {
+            "description": "How long to wait between polls. Polling faster spends the shared per-address budget on one pairing and earns a 429.",
+            "type": "integer"
+          },
+          "poll_token": {
+            "description": "Keep this. It is what the panel polls with, and it is never shown.",
+            "type": "string"
           }
         },
         "required": [
-          "type",
-          "registration"
+          "code",
+          "poll_token",
+          "expires_at",
+          "poll_after_ms"
+        ],
+        "type": "object"
+      },
+      "PairingPending": {
+        "description": "Nobody has typed the code yet. Keep polling.",
+        "properties": {
+          "poll_after_ms": {
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "pending"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "poll_after_ms"
+        ],
+        "type": "object"
+      },
+      "PanelTokenResponse": {
+        "description": "The pairing was confirmed. This body is returned exactly once.",
+        "properties": {
+          "label": {
+            "description": "What this pairing is called in account settings, until renamed.",
+            "example": "Cockpit paired 25 Sep 2026",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "paired"
+            ],
+            "type": "string"
+          },
+          "token": {
+            "description": "Present as `Authorization: Bearer`. It never expires and is revoked from account settings, so store it where the panel will find it again.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "token",
+          "label"
         ],
         "type": "object"
       },
@@ -523,30 +848,412 @@
         },
         "type": "object"
       },
-      "FlightInfo": {
+      "PlanList": {
         "properties": {
-          "date": {
-            "$ref": "#/components/schemas/Field",
-            "title": "date"
+          "disclaimer": {
+            "type": "string"
           },
-          "etd": {
-            "$ref": "#/components/schemas/Field",
-            "title": "etd"
+          "plans": {
+            "items": {
+              "$ref": "#/components/schemas/PlanSummary"
+            },
+            "type": "array"
           },
-          "route_name": {
-            "$ref": "#/components/schemas/Field",
-            "title": "route name"
-          },
-          "transponder": {
-            "$ref": "#/components/schemas/Field",
-            "title": "transponder"
+          "working_sheet": {
+            "description": "The plan this account is in the middle of, by id alone. It is not one of `plans`: the shelf is what the pilot asked to keep.",
+            "properties": {
+              "id": {
+                "format": "uuid",
+                "type": "string"
+              }
+            },
+            "type": [
+              "object",
+              "null"
+            ]
           }
         },
         "required": [
-          "date",
-          "route_name",
-          "etd",
-          "transponder"
+          "plans",
+          "working_sheet",
+          "disclaimer"
+        ],
+        "type": "object"
+      },
+      "PlanResponse": {
+        "properties": {
+          "disclaimer": {
+            "type": "string"
+          },
+          "fields": {
+            "additionalProperties": {
+              "type": "object"
+            },
+            "description": "Each field's unit, type and, where a wrong guess is expensive, its sign convention -- once per response rather than on every field object. `var` is positive WEST, the opposite of the WMM convention.",
+            "type": "object"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/Plan"
+          }
+        },
+        "required": [
+          "plan",
+          "fields",
+          "disclaimer"
+        ],
+        "type": "object"
+      },
+      "PlanSummary": {
+        "properties": {
+          "departure": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "destination": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "enroute": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "label": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "route_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "route_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "updated_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "PollBody": {
+        "description": "The secret from `POST /panel/pair`.",
+        "properties": {
+          "poll_token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "poll_token"
+        ],
+        "type": "object"
+      },
+      "RefreshBody": {
+        "description": "Optional. Narrows the refresh to these airports' reports -- what a cockpit checking its destination wants. Forecasts are a whole-route act and are asked for only when the whole route is.",
+        "properties": {
+          "stations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "RefreshResponse": {
+        "properties": {
+          "disclaimer": {
+            "type": "string"
+          },
+          "fields": {
+            "additionalProperties": {
+              "type": "object"
+            },
+            "description": "Each field's unit, type and, where a wrong guess is expensive, its sign convention -- once per response rather than on every field object. `var` is positive WEST, the opposite of the WMM convention.",
+            "type": "object"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/Plan"
+          },
+          "stations": {
+            "items": {
+              "$ref": "#/components/schemas/StationOutcome"
+            },
+            "type": "array"
+          },
+          "writes": {
+            "items": {
+              "$ref": "#/components/schemas/WriteOutcome"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "plan",
+          "stations",
+          "writes",
+          "fields",
+          "disclaimer"
+        ],
+        "type": "object"
+      },
+      "RenderAvailability": {
+        "description": "What could not be had, and why. Missing data is said, never drawn as nothing.",
+        "properties": {
+          "airspace": {
+            "description": "`loading` means ask again: an empty `airspace` is not yet \"none\".",
+            "enum": [
+              "covered",
+              "loading",
+              "refused",
+              "no_source"
+            ],
+            "type": "string"
+          },
+          "terrain": {
+            "description": "`ok`, or why not.",
+            "type": "string"
+          },
+          "weather": {
+            "description": "Airports whose METAR was asked for, and how many answered.",
+            "type": "object"
+          }
+        },
+        "required": [
+          "airspace",
+          "terrain",
+          "weather"
+        ],
+        "type": "object"
+      },
+      "RenderCheckpoint": {
+        "description": "One checkpoint on the timeline, with what its card shows.",
+        "properties": {
+          "altitude": {},
+          "compass_heading": {},
+          "cumulative_dist": {},
+          "cumulative_ete": {},
+          "cumulative_minutes": {},
+          "elevation": {},
+          "flight_category": {},
+          "frequencies": {
+            "items": {
+              "$ref": "#/components/schemas/Frequency"
+            },
+            "type": "array"
+          },
+          "fuel_remaining": {},
+          "fuel_used": {},
+          "ident": {},
+          "inbound_heading": {},
+          "lat": {},
+          "leg_dist": {},
+          "lon": {},
+          "metar_summary": {},
+          "name": {},
+          "navaid_type": {},
+          "pattern": {},
+          "tc": {},
+          "transponder": {},
+          "turn": {},
+          "type": {},
+          "waypoint_index": {},
+          "waypoint_type": {}
+        },
+        "required": [
+          "altitude",
+          "compass_heading",
+          "cumulative_dist",
+          "cumulative_ete",
+          "cumulative_minutes",
+          "elevation",
+          "flight_category",
+          "frequencies",
+          "fuel_remaining",
+          "fuel_used",
+          "ident",
+          "inbound_heading",
+          "lat",
+          "leg_dist",
+          "lon",
+          "metar_summary",
+          "name",
+          "navaid_type",
+          "pattern",
+          "tc",
+          "transponder",
+          "turn",
+          "type",
+          "waypoint_index",
+          "waypoint_type"
+        ],
+        "type": "object"
+      },
+      "RenderColumns": {
+        "description": "The nav log's columns, in order, as the printed sheet carries them.",
+        "properties": {
+          "checkpoint_width": {
+            "description": "CSS width, e.g. \"18.6%\".",
+            "type": "string"
+          },
+          "columns": {
+            "items": {
+              "description": "One column. `fields` name the leg fields it shows, keys of `fields` in the response. A wind block is one column over two physical ones, so `widths` has one entry per physical column.",
+              "properties": {
+                "align": {
+                  "enum": [
+                    "leg",
+                    "checkpoint"
+                  ],
+                  "type": "string"
+                },
+                "fields": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "group": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "group_label": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "sub_labels": {
+                  "type": [
+                    "array",
+                    "null"
+                  ]
+                },
+                "type": {
+                  "type": "string"
+                },
+                "widths": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "align",
+                "fields",
+                "group",
+                "group_label",
+                "key",
+                "label",
+                "sub_labels",
+                "type",
+                "widths"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "checkpoint_width",
+          "columns"
+        ],
+        "type": "object"
+      },
+      "RenderResponse": {
+        "properties": {
+          "arrivals": {
+            "items": {
+              "$ref": "#/components/schemas/Arrival"
+            },
+            "type": "array"
+          },
+          "availability": {
+            "$ref": "#/components/schemas/RenderAvailability"
+          },
+          "columns": {
+            "$ref": "#/components/schemas/RenderColumns"
+          },
+          "credits": {
+            "items": {
+              "$ref": "#/components/schemas/Credit"
+            },
+            "type": "array"
+          },
+          "disclaimer": {
+            "type": "string"
+          },
+          "fields": {
+            "additionalProperties": {
+              "type": "object"
+            },
+            "description": "Each field's unit, type and, where a wrong guess is expensive, its sign convention -- once per response rather than on every field object. `var` is positive WEST, the opposite of the WMM convention.",
+            "type": "object"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/Plan"
+          },
+          "terrain": {
+            "description": "Null when no terrain could be had; `availability.terrain` says why.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/RenderTerrain"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "timeline": {
+            "$ref": "#/components/schemas/RenderTimeline"
+          },
+          "totals": {
+            "$ref": "#/components/schemas/RenderTotals"
+          }
+        },
+        "required": [
+          "arrivals",
+          "availability",
+          "columns",
+          "credits",
+          "plan",
+          "terrain",
+          "timeline",
+          "totals",
+          "fields",
+          "disclaimer"
         ],
         "type": "object"
       },
@@ -631,105 +1338,265 @@
         ],
         "type": "object"
       },
-      "OpenApiDocument": {
-        "description": "This document.",
-        "type": "object"
-      },
-      "FuelResponse": {
+      "RenderTimeline": {
+        "description": "The Flight Timeline, placed. Every `*_pct` is a position across the band, so it holds at any width; `nm` figures are along the route.",
         "properties": {
-          "disclaimer": {
-            "type": "string"
-          },
-          "fields": {
-            "additionalProperties": {
-              "type": "object"
-            },
-            "description": "Each field's unit, type and, where a wrong guess is expensive, its sign convention -- once per response rather than on every field object. `var` is positive WEST, the opposite of the WMM convention.",
-            "type": "object"
-          },
-          "fuel": {
-            "$ref": "#/components/schemas/Fuel"
-          }
-        },
-        "required": [
-          "fuel",
-          "fields",
-          "disclaimer"
-        ],
-        "type": "object"
-      },
-      "WriteOutcome": {
-        "description": "What became of one write. Read `state`, not `value`: a value renders straight off the sheet whether the write landed or a suggester overtook it.",
-        "properties": {
-          "applied": {
-            "type": "boolean"
-          },
-          "path": {
-            "examples": [
-              "legs/0/tas",
-              "fuel/reserves"
-            ],
-            "type": "string"
-          },
-          "reason": {
-            "description": "Why it did not apply.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "slot": {
-            "enum": [
-              "value",
-              "suggestion"
-            ],
-            "type": "string"
-          },
-          "state": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "value": {
-            "description": "What the field holds now."
-          }
-        },
-        "required": [
-          "path",
-          "slot",
-          "applied",
-          "state",
-          "value",
-          "reason"
-        ],
-        "type": "object"
-      },
-      "WriteResponse": {
-        "properties": {
-          "disclaimer": {
-            "type": "string"
-          },
-          "fields": {
-            "additionalProperties": {
-              "type": "object"
-            },
-            "description": "Each field's unit, type and, where a wrong guess is expensive, its sign convention -- once per response rather than on every field object. `var` is positive WEST, the opposite of the WMM convention.",
-            "type": "object"
-          },
-          "plan": {
-            "$ref": "#/components/schemas/Plan"
-          },
-          "writes": {
+          "airport_cards": {
+            "description": "`checkpoint` indexes `checkpoints`.",
             "items": {
-              "$ref": "#/components/schemas/WriteOutcome"
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "airspace": {
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "checkpoints": {
+            "items": {
+              "$ref": "#/components/schemas/RenderCheckpoint"
+            },
+            "type": "array"
+          },
+          "enroute_labels": {
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "event_pcts": {
+            "items": {
+              "description": "Percent of the band's width, 0-100.",
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "first_pct": {
+            "description": "Percent of the band's width, 0-100.",
+            "type": "number"
+          },
+          "flight": {
+            "description": "The flight line: bends as `{nm, ft, kind}`, and its transitions.",
+            "type": "object"
+          },
+          "frequency_lanes": {
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "handover_pcts": {
+            "items": {
+              "description": "Percent of the band's width, 0-100.",
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "last_pct": {
+            "description": "Percent of the band's width, 0-100.",
+            "type": "number"
+          },
+          "leg_labels": {
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "marker_pcts": {
+            "items": {
+              "description": "Percent of the band's width, 0-100.",
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "night_spans": {
+            "description": "Dark stretches, `{from, to}` in nm.",
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "stat_stacks": {
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "transition_pcts": {
+            "items": {
+              "description": "Percent of the band's width, 0-100.",
+              "type": "number"
             },
             "type": "array"
           }
         },
         "required": [
-          "plan",
-          "writes",
+          "airport_cards",
+          "airspace",
+          "checkpoints",
+          "enroute_labels",
+          "event_pcts",
+          "first_pct",
+          "flight",
+          "frequency_lanes",
+          "handover_pcts",
+          "last_pct",
+          "leg_labels",
+          "marker_pcts",
+          "night_spans",
+          "stat_stacks",
+          "transition_pcts"
+        ],
+        "type": "object"
+      },
+      "RenderTotals": {
+        "description": "The totals row's three sums.",
+        "properties": {
+          "distance_nm": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "x-unit": "NM"
+          },
+          "ete": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ete_minutes": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "x-unit": "min"
+          },
+          "fuel_burn": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "x-unit": "gal"
+          }
+        },
+        "required": [
+          "distance_nm",
+          "ete",
+          "ete_minutes",
+          "fuel_burn"
+        ],
+        "type": "object"
+      },
+      "StationOutcome": {
+        "description": "What became of one airport that was asked.",
+        "properties": {
+          "ident": {
+            "type": "string"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "reached": {
+            "type": "boolean"
+          },
+          "reason": {
+            "description": "Why it was not reached. Null when it was.",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "ident",
+          "reached"
+        ],
+        "type": "object"
+      },
+      "Waypoint": {
+        "description": "A checkpoint. The fields a pilot writes carry the Field shape; the record behind them -- frequencies, the airport data -- is plain, because wrapping a list of frequencies would claim it is a cell on the sheet.",
+        "properties": {
+          "airport_info": {
+            "description": "Field elevation is read live, never from the saved copy.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "climb_rate_fpm": {
+            "$ref": "#/components/schemas/Field",
+            "title": "climb rate fpm"
+          },
+          "descent_rate_fpm": {
+            "$ref": "#/components/schemas/Field",
+            "title": "descent rate fpm"
+          },
+          "frequencies": {
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "ident": {
+            "$ref": "#/components/schemas/Field",
+            "title": "ident"
+          },
+          "ident_stale": {
+            "type": "boolean"
+          },
+          "lat": {
+            "$ref": "#/components/schemas/Field",
+            "title": "lat"
+          },
+          "lon": {
+            "$ref": "#/components/schemas/Field",
+            "title": "lon"
+          },
+          "name": {
+            "$ref": "#/components/schemas/Field",
+            "title": "name"
+          },
+          "poi_key": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": {
+            "$ref": "#/components/schemas/Field",
+            "title": "type"
+          }
+        },
+        "type": "object"
+      },
+      "WaypointsResponse": {
+        "properties": {
+          "disclaimer": {
+            "type": "string"
+          },
+          "fields": {
+            "additionalProperties": {
+              "type": "object"
+            },
+            "description": "Each field's unit, type and, where a wrong guess is expensive, its sign convention -- once per response rather than on every field object. `var` is positive WEST, the opposite of the WMM convention.",
+            "type": "object"
+          },
+          "waypoints": {
+            "items": {
+              "$ref": "#/components/schemas/Waypoint"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "waypoints",
           "fields",
           "disclaimer"
         ],
@@ -1922,312 +2789,54 @@
         },
         "type": "object"
       },
-      "StationOutcome": {
-        "description": "What became of one airport that was asked.",
+      "WriteOutcome": {
+        "description": "What became of one write. Read `state`, not `value`: a value renders straight off the sheet whether the write landed or a suggester overtook it.",
         "properties": {
-          "ident": {
-            "type": "string"
-          },
-          "observed_at": {
-            "format": "date-time",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "reached": {
+          "applied": {
             "type": "boolean"
           },
+          "path": {
+            "examples": [
+              "legs/0/tas",
+              "fuel/reserves"
+            ],
+            "type": "string"
+          },
           "reason": {
-            "description": "Why it was not reached. Null when it was.",
+            "description": "Why it did not apply.",
             "type": [
               "string",
               "null"
             ]
-          }
-        },
-        "required": [
-          "ident",
-          "reached"
-        ],
-        "type": "object"
-      },
-      "Frequency": {
-        "description": "A labelled radio frequency.",
-        "properties": {
-          "label": {
+          },
+          "slot": {
+            "enum": [
+              "value",
+              "suggestion"
+            ],
+            "type": "string"
+          },
+          "state": {
             "type": [
               "string",
               "null"
             ]
           },
           "value": {
-            "type": "string",
-            "x-unit": "MHz"
+            "description": "What the field holds now."
           }
         },
         "required": [
-          "label",
-          "value"
+          "path",
+          "slot",
+          "applied",
+          "state",
+          "value",
+          "reason"
         ],
         "type": "object"
       },
-      "RenderAvailability": {
-        "description": "What could not be had, and why. Missing data is said, never drawn as nothing.",
-        "properties": {
-          "airspace": {
-            "description": "`loading` means ask again: an empty `airspace` is not yet \"none\".",
-            "enum": [
-              "covered",
-              "loading",
-              "refused",
-              "no_source"
-            ],
-            "type": "string"
-          },
-          "terrain": {
-            "description": "`ok`, or why not.",
-            "type": "string"
-          },
-          "weather": {
-            "description": "Airports whose METAR was asked for, and how many answered.",
-            "type": "object"
-          }
-        },
-        "required": [
-          "airspace",
-          "terrain",
-          "weather"
-        ],
-        "type": "object"
-      },
-      "RefreshBody": {
-        "description": "Optional. Narrows the refresh to these airports' reports -- what a cockpit checking its destination wants. Forecasts are a whole-route act and are asked for only when the whole route is.",
-        "properties": {
-          "stations": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          }
-        },
-        "type": "object"
-      },
-      "ConditionsResponse": {
-        "properties": {
-          "conditions": {
-            "items": {
-              "$ref": "#/components/schemas/FieldConditions"
-            },
-            "type": "array"
-          },
-          "disclaimer": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "conditions",
-          "disclaimer"
-        ],
-        "type": "object"
-      },
-      "FieldConditions": {
-        "description": "One airport on the route. Either the figures and the station they came from, or `absent` saying why there are none -- never a guessed number.",
-        "properties": {
-          "absent": {
-            "description": "Why there are no figures. Present only when there are none.",
-            "type": "string"
-          },
-          "density_altitude": {
-            "description": "Absent when the report carries no temperature.",
-            "type": [
-              "integer",
-              "null"
-            ],
-            "x-unit": "ft"
-          },
-          "field_elevation": {
-            "type": [
-              "integer",
-              "null"
-            ],
-            "x-unit": "ft"
-          },
-          "ident": {
-            "type": "string"
-          },
-          "isa_deviation_c": {
-            "type": [
-              "integer",
-              "null"
-            ],
-            "x-unit": "degrees C"
-          },
-          "oat_c": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "x-unit": "degrees C"
-          },
-          "pressure_altitude": {
-            "type": "integer",
-            "x-unit": "ft"
-          },
-          "qnh_hpa": {
-            "type": "number",
-            "x-unit": "hPa"
-          },
-          "station": {
-            "description": "Whose report this is. `distance_nm` of 0 is the airport's own; anything else is borrowed, and from how far.",
-            "properties": {
-              "bearing": {
-                "type": [
-                  "integer",
-                  "null"
-                ],
-                "x-unit": "degrees true"
-              },
-              "distance_nm": {
-                "type": [
-                  "number",
-                  "null"
-                ]
-              },
-              "id": {
-                "type": "string"
-              },
-              "observed_at": {
-                "format": "date-time",
-                "type": [
-                  "string",
-                  "null"
-                ]
-              }
-            },
-            "type": [
-              "object",
-              "null"
-            ]
-          }
-        },
-        "required": [
-          "ident",
-          "field_elevation",
-          "station"
-        ],
-        "type": "object"
-      },
-      "RenderColumns": {
-        "description": "The nav log's columns, in order, as the printed sheet carries them.",
-        "properties": {
-          "checkpoint_width": {
-            "description": "CSS width, e.g. \"18.6%\".",
-            "type": "string"
-          },
-          "columns": {
-            "items": {
-              "description": "One column. `fields` name the leg fields it shows, keys of `fields` in the response. A wind block is one column over two physical ones, so `widths` has one entry per physical column.",
-              "properties": {
-                "align": {
-                  "enum": [
-                    "leg",
-                    "checkpoint"
-                  ],
-                  "type": "string"
-                },
-                "fields": {
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                },
-                "group": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "group_label": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "key": {
-                  "type": "string"
-                },
-                "label": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "sub_labels": {
-                  "type": [
-                    "array",
-                    "null"
-                  ]
-                },
-                "type": {
-                  "type": "string"
-                },
-                "widths": {
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                }
-              },
-              "required": [
-                "align",
-                "fields",
-                "group",
-                "group_label",
-                "key",
-                "label",
-                "sub_labels",
-                "type",
-                "widths"
-              ],
-              "type": "object"
-            },
-            "type": "array"
-          }
-        },
-        "required": [
-          "checkpoint_width",
-          "columns"
-        ],
-        "type": "object"
-      },
-      "PanelTokenResponse": {
-        "description": "The pairing was confirmed. This body is returned exactly once.",
-        "properties": {
-          "label": {
-            "description": "What this pairing is called in account settings, until renamed.",
-            "example": "Cockpit paired 25 Sep 2026",
-            "type": "string"
-          },
-          "status": {
-            "enum": [
-              "paired"
-            ],
-            "type": "string"
-          },
-          "token": {
-            "description": "Present as `Authorization: Bearer`. It never expires and is revoked from account settings, so store it where the panel will find it again.",
-            "type": "string"
-          }
-        },
-        "required": [
-          "status",
-          "token",
-          "label"
-        ],
-        "type": "object"
-      },
-      "RefreshResponse": {
+      "WriteResponse": {
         "properties": {
           "disclaimer": {
             "type": "string"
@@ -2241,12 +2850,6 @@
           },
           "plan": {
             "$ref": "#/components/schemas/Plan"
-          },
-          "stations": {
-            "items": {
-              "$ref": "#/components/schemas/StationOutcome"
-            },
-            "type": "array"
           },
           "writes": {
             "items": {
@@ -2257,612 +2860,9 @@
         },
         "required": [
           "plan",
-          "stations",
           "writes",
           "fields",
           "disclaimer"
-        ],
-        "type": "object"
-      },
-      "LegsResponse": {
-        "properties": {
-          "disclaimer": {
-            "type": "string"
-          },
-          "fields": {
-            "additionalProperties": {
-              "type": "object"
-            },
-            "description": "Each field's unit, type and, where a wrong guess is expensive, its sign convention -- once per response rather than on every field object. `var` is positive WEST, the opposite of the WMM convention.",
-            "type": "object"
-          },
-          "legs": {
-            "items": {
-              "$ref": "#/components/schemas/Leg"
-            },
-            "type": "array"
-          }
-        },
-        "required": [
-          "legs",
-          "fields",
-          "disclaimer"
-        ],
-        "type": "object"
-      },
-      "RenderResponse": {
-        "properties": {
-          "arrivals": {
-            "items": {
-              "$ref": "#/components/schemas/Arrival"
-            },
-            "type": "array"
-          },
-          "availability": {
-            "$ref": "#/components/schemas/RenderAvailability"
-          },
-          "columns": {
-            "$ref": "#/components/schemas/RenderColumns"
-          },
-          "credits": {
-            "items": {
-              "$ref": "#/components/schemas/Credit"
-            },
-            "type": "array"
-          },
-          "disclaimer": {
-            "type": "string"
-          },
-          "fields": {
-            "additionalProperties": {
-              "type": "object"
-            },
-            "description": "Each field's unit, type and, where a wrong guess is expensive, its sign convention -- once per response rather than on every field object. `var` is positive WEST, the opposite of the WMM convention.",
-            "type": "object"
-          },
-          "plan": {
-            "$ref": "#/components/schemas/Plan"
-          },
-          "terrain": {
-            "description": "Null when no terrain could be had; `availability.terrain` says why.",
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/RenderTerrain"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "timeline": {
-            "$ref": "#/components/schemas/RenderTimeline"
-          },
-          "totals": {
-            "$ref": "#/components/schemas/RenderTotals"
-          }
-        },
-        "required": [
-          "arrivals",
-          "availability",
-          "columns",
-          "credits",
-          "plan",
-          "terrain",
-          "timeline",
-          "totals",
-          "fields",
-          "disclaimer"
-        ],
-        "type": "object"
-      },
-      "RenderTimeline": {
-        "description": "The Flight Timeline, placed. Every `*_pct` is a position across the band, so it holds at any width; `nm` figures are along the route.",
-        "properties": {
-          "airport_cards": {
-            "description": "`checkpoint` indexes `checkpoints`.",
-            "items": {
-              "type": "object"
-            },
-            "type": "array"
-          },
-          "airspace": {
-            "items": {
-              "type": "object"
-            },
-            "type": "array"
-          },
-          "checkpoints": {
-            "items": {
-              "$ref": "#/components/schemas/RenderCheckpoint"
-            },
-            "type": "array"
-          },
-          "enroute_labels": {
-            "items": {
-              "type": "object"
-            },
-            "type": "array"
-          },
-          "event_pcts": {
-            "items": {
-              "description": "Percent of the band's width, 0-100.",
-              "type": "number"
-            },
-            "type": "array"
-          },
-          "first_pct": {
-            "description": "Percent of the band's width, 0-100.",
-            "type": "number"
-          },
-          "flight": {
-            "description": "The flight line: bends as `{nm, ft, kind}`, and its transitions.",
-            "type": "object"
-          },
-          "frequency_lanes": {
-            "items": {
-              "type": "object"
-            },
-            "type": "array"
-          },
-          "handover_pcts": {
-            "items": {
-              "description": "Percent of the band's width, 0-100.",
-              "type": "number"
-            },
-            "type": "array"
-          },
-          "last_pct": {
-            "description": "Percent of the band's width, 0-100.",
-            "type": "number"
-          },
-          "leg_labels": {
-            "items": {
-              "type": "object"
-            },
-            "type": "array"
-          },
-          "marker_pcts": {
-            "items": {
-              "description": "Percent of the band's width, 0-100.",
-              "type": "number"
-            },
-            "type": "array"
-          },
-          "night_spans": {
-            "description": "Dark stretches, `{from, to}` in nm.",
-            "items": {
-              "type": "object"
-            },
-            "type": "array"
-          },
-          "stat_stacks": {
-            "items": {
-              "type": "object"
-            },
-            "type": "array"
-          },
-          "transition_pcts": {
-            "items": {
-              "description": "Percent of the band's width, 0-100.",
-              "type": "number"
-            },
-            "type": "array"
-          }
-        },
-        "required": [
-          "airport_cards",
-          "airspace",
-          "checkpoints",
-          "enroute_labels",
-          "event_pcts",
-          "first_pct",
-          "flight",
-          "frequency_lanes",
-          "handover_pcts",
-          "last_pct",
-          "leg_labels",
-          "marker_pcts",
-          "night_spans",
-          "stat_stacks",
-          "transition_pcts"
-        ],
-        "type": "object"
-      },
-      "Fuel": {
-        "properties": {
-          "climb": {
-            "$ref": "#/components/schemas/Field",
-            "description": "gallons for the climb phase — the rate beside it is climb_gph",
-            "title": "climb fuel",
-            "x-unit": "gallon"
-          },
-          "climb_gph": {
-            "$ref": "#/components/schemas/Field",
-            "description": "the plan's own climb rate, seeded from the aircraft profile's climb_gph and written by the pilot; every leg up to the TOC burns at it",
-            "title": "climb burn rate",
-            "x-range": {
-              "maximum": 200,
-              "minimum": 0
-            },
-            "x-unit": "gallon_per_hour"
-          },
-          "cruise": {
-            "$ref": "#/components/schemas/Field",
-            "description": "gallons for the cruise phase — the rate beside it is cruise_gph",
-            "title": "cruise fuel",
-            "x-unit": "gallon"
-          },
-          "cruise_gph": {
-            "$ref": "#/components/schemas/Field",
-            "description": "the plan's own cruise rate, seeded from the aircraft profile's cruise_gph and written by the pilot; every leg after the TOC burns at it",
-            "title": "cruise burn rate",
-            "x-range": {
-              "maximum": 200,
-              "minimum": 0
-            },
-            "x-unit": "gallon_per_hour"
-          },
-          "fuel_available": {
-            "$ref": "#/components/schemas/Field",
-            "title": "usable fuel",
-            "x-unit": "gallon"
-          },
-          "reserves": {
-            "$ref": "#/components/schemas/Field",
-            "title": "reserve fuel",
-            "x-unit": "gallon"
-          },
-          "reserves_gph": {
-            "$ref": "#/components/schemas/Field",
-            "description": "the rate the reserve is counted at — cruise_gph unless the pilot says otherwise",
-            "title": "reserve burn rate",
-            "x-range": {
-              "maximum": 200,
-              "minimum": 0
-            },
-            "x-unit": "gallon_per_hour"
-          },
-          "reserves_minutes": {
-            "$ref": "#/components/schemas/Field",
-            "description": "minutes of reserve to hold back; 45 unless the whole flight lands in daylight",
-            "title": "reserve duration",
-            "x-range": {
-              "maximum": 600,
-              "minimum": 0
-            },
-            "x-unit": "minute"
-          },
-          "run_up_taxi_takeoff": {
-            "$ref": "#/components/schemas/Field",
-            "title": "run-up, taxi and take-off fuel",
-            "x-unit": "gallon"
-          },
-          "total": {
-            "$ref": "#/components/schemas/Field",
-            "title": "total fuel",
-            "x-unit": "gallon"
-          }
-        },
-        "required": [
-          "total",
-          "fuel_available",
-          "run_up_taxi_takeoff",
-          "cruise",
-          "climb",
-          "climb_gph",
-          "cruise_gph",
-          "reserves",
-          "reserves_gph",
-          "reserves_minutes"
-        ],
-        "type": "object"
-      },
-      "RenderTotals": {
-        "description": "The totals row's three sums.",
-        "properties": {
-          "distance_nm": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "x-unit": "NM"
-          },
-          "ete": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "ete_minutes": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "x-unit": "min"
-          },
-          "fuel_burn": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "x-unit": "gal"
-          }
-        },
-        "required": [
-          "distance_nm",
-          "ete",
-          "ete_minutes",
-          "fuel_burn"
-        ],
-        "type": "object"
-      },
-      "Waypoint": {
-        "description": "A checkpoint. The fields a pilot writes carry the Field shape; the record behind them -- frequencies, the airport data -- is plain, because wrapping a list of frequencies would claim it is a cell on the sheet.",
-        "properties": {
-          "airport_info": {
-            "description": "Field elevation is read live, never from the saved copy.",
-            "type": [
-              "object",
-              "null"
-            ]
-          },
-          "climb_rate_fpm": {
-            "$ref": "#/components/schemas/Field",
-            "title": "climb rate fpm"
-          },
-          "descent_rate_fpm": {
-            "$ref": "#/components/schemas/Field",
-            "title": "descent rate fpm"
-          },
-          "frequencies": {
-            "items": {
-              "type": "object"
-            },
-            "type": "array"
-          },
-          "ident": {
-            "$ref": "#/components/schemas/Field",
-            "title": "ident"
-          },
-          "ident_stale": {
-            "type": "boolean"
-          },
-          "lat": {
-            "$ref": "#/components/schemas/Field",
-            "title": "lat"
-          },
-          "lon": {
-            "$ref": "#/components/schemas/Field",
-            "title": "lon"
-          },
-          "name": {
-            "$ref": "#/components/schemas/Field",
-            "title": "name"
-          },
-          "poi_key": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "type": {
-            "$ref": "#/components/schemas/Field",
-            "title": "type"
-          }
-        },
-        "type": "object"
-      },
-      "CockpitPlan": {
-        "description": "The plan a paired cockpit shows, and which rule chose it.",
-        "properties": {
-          "binding": {
-            "description": "`explicit` -- the pilot sent this plan with \"Send to sim\". `last_touched` -- nothing was sent, so this is their most recently updated plan. Show which: a default that says so is not ambient.",
-            "enum": [
-              "explicit",
-              "last_touched"
-            ],
-            "type": "string"
-          },
-          "disclaimer": {
-            "type": "string"
-          },
-          "plan": {
-            "$ref": "#/components/schemas/PlanSummary"
-          },
-          "plan_id": {
-            "format": "uuid",
-            "type": "string"
-          }
-        },
-        "required": [
-          "plan_id",
-          "binding",
-          "plan",
-          "disclaimer"
-        ],
-        "type": "object"
-      },
-      "PlanList": {
-        "properties": {
-          "disclaimer": {
-            "type": "string"
-          },
-          "plans": {
-            "items": {
-              "$ref": "#/components/schemas/PlanSummary"
-            },
-            "type": "array"
-          },
-          "working_sheet": {
-            "description": "The plan this account is in the middle of, by id alone. It is not one of `plans`: the shelf is what the pilot asked to keep.",
-            "properties": {
-              "id": {
-                "format": "uuid",
-                "type": "string"
-              }
-            },
-            "type": [
-              "object",
-              "null"
-            ]
-          }
-        },
-        "required": [
-          "plans",
-          "working_sheet",
-          "disclaimer"
-        ],
-        "type": "object"
-      },
-      "PlanSummary": {
-        "properties": {
-          "departure": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "destination": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "enroute": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "id": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "label": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "route_id": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "route_name": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "updated_at": {
-            "type": [
-              "string",
-              "null"
-            ]
-          }
-        },
-        "type": "object"
-      },
-      "Field": {
-        "description": "One field, always the same shape: what the pilot entered, and every slot behind it. `value` is null for a `suggested` field -- the number there is the calculator's own offer, not theirs.",
-        "properties": {
-          "computed": {
-            "description": "What the engine derived. Read-only."
-          },
-          "origin": {
-            "description": "Which reading it came from.",
-            "type": [
-              "object",
-              "null"
-            ]
-          },
-          "source": {
-            "description": "Who authored the offer.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "state": {
-            "description": "Read this, not the value, to learn whether a write landed.",
-            "enum": [
-              "suggested",
-              "confirmed",
-              "stale",
-              "invalid",
-              null
-            ],
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "suggestion": {
-            "description": "A value offered from outside the engine."
-          },
-          "value": {
-            "description": "The pilot's entry."
-          }
-        },
-        "required": [
-          "value",
-          "computed",
-          "suggestion",
-          "state",
-          "source",
-          "origin"
-        ],
-        "type": "object"
-      },
-      "PairResponse": {
-        "description": "A pairing in flight: what to show, and what to poll with.",
-        "properties": {
-          "code": {
-            "description": "Six characters for the panel to display, hyphenated. Drawn from Crockford Base32, so it carries no I, L, O or U -- the glyphs a pilot misreads through a headset.",
-            "example": "K7Q-4R2",
-            "type": "string"
-          },
-          "expires_at": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "poll_after_ms": {
-            "description": "How long to wait between polls. Polling faster spends the shared per-address budget on one pairing and earns a 429.",
-            "type": "integer"
-          },
-          "poll_token": {
-            "description": "Keep this. It is what the panel polls with, and it is never shown.",
-            "type": "string"
-          }
-        },
-        "required": [
-          "code",
-          "poll_token",
-          "expires_at",
-          "poll_after_ms"
-        ],
-        "type": "object"
-      },
-      "PairingPending": {
-        "description": "Nobody has typed the code yet. Keep polling.",
-        "properties": {
-          "poll_after_ms": {
-            "type": "integer"
-          },
-          "status": {
-            "enum": [
-              "pending"
-            ],
-            "type": "string"
-          }
-        },
-        "required": [
-          "status",
-          "poll_after_ms"
         ],
         "type": "object"
       }
