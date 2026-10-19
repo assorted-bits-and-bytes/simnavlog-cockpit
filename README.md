@@ -42,14 +42,15 @@ only places things. It never does arithmetic.
 ## Development
 
 Node from `.nvmrc`, and Docker for the screenshot tests. The renderer itself
-has no runtime dependencies. The five dev dependencies are pinned exactly.
+has no runtime dependencies. The six dev dependencies are pinned exactly.
 
 ```bash
 nvm use                       # node 24
 npm ci
 npm run build                 # dist/: the renderer, and the harness with its fixtures
 xdg-open harness/index.html   # pick a fixture and a width; no server needed
-npm test                      # the old-engine gate
+npm test                      # the old-engine gate, and every fixture against the contract
+npm run contract:pull         # re-vendor contract/openapi.json from simnavlog.com
 npm run test:screens          # screenshot every fixture at every width, compare exactly
 npm run test:screens:update   # accept new pixels, then review the PNG diff in git
 npm run format
@@ -66,9 +67,19 @@ version matches `@playwright/test`, locally and in CI alike, so the
 comparison can be exact: one changed pixel fails it. The EFB widths in
 `harness/widths.js` are provisional until the spike measures the tablet.
 
-**Fixtures** are real plans from SimNavLog's API, with their ids replaced.
-Add a `.json` to `fixtures/` and to `fixtures/index.js`. The screenshot
-tests pick it up by itself.
+**Fixtures** are real plans, saved in SimNavLog and fetched from
+`GET /api/v1/plans/:id/render` with their ids replaced. Add a `.json` to
+`fixtures/` and to `fixtures/index.js`, and the screenshot tests pick it up
+by themselves. `essb-esgj` is a Swedish route with named checkpoints and
+winds aloft. `kpou-kldj` is the Hudson corridor: unnamed user points under
+New York's Class B, with terrain that runs below sea level.
+
+**The contract** is SimNavLog's OpenAPI document, vendored as
+`contract/openapi.json`. `npm test` validates every fixture against its
+`RenderResponse` schema. When the server's shape moves, run
+`npm run contract:pull` and commit the diff. The tests then fail until the
+fixtures follow. SimNavLog holds its side of the same schema with its own
+test, so neither repository can drift from it alone.
 
 Third-party material: the _Just Another Hand_ font, Apache-2.0, is re-encoded
 from the woff2 that SimNavLog serves. Its licence travels with it.
