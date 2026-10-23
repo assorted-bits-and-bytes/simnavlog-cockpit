@@ -21,6 +21,16 @@
   var FETCH_TIMEOUT_MS = 10000;
   var FONT_WAIT_MS = 4000;
 
+  // Build 1 measured before the EFB had laid the page out: the container was
+  // 0 x 0, so every "drawn" row read no, flexbox included. Nothing is
+  // measured now until the container has a size, or this long has passed.
+  var LAYOUT_WAIT_MS = 5000;
+
+  // Build 1 also put the rows that mattered most below the fold, and the EFB
+  // does not scroll an overflow:auto box. Rows are shown a page at a time,
+  // the questions build 1 left open first.
+  var GROUP_ORDER = ["net", "storage", "env", "css", "svg", "font", "js"];
+
   // ---------------------------------------------------------------- results
 
   function result(group, name, value, verdict) {
@@ -623,51 +633,180 @@
     });
   }
 
-  function render(container, build, rows) {
-    var table = rows
-      .map(function (r) {
-        return (
-          '<tr><td style="padding:2px 8px;color:#555">' +
-          r.group +
-          "</td>" +
-          '<td style="padding:2px 8px">' +
-          escapeHtml(r.name) +
-          "</td>" +
-          '<td style="padding:2px 8px;color:' +
-          COLOURS[r.verdict] +
-          '">' +
-          escapeHtml(r.value) +
-          "</td></tr>"
-        );
+  function byGroup(rows) {
+    function rank(row) {
+      var at = GROUP_ORDER.indexOf(row.group);
+      return at === -1 ? GROUP_ORDER.length : at;
+    }
+    return rows
+      .map(function (row, index) {
+        return { row: row, index: index };
       })
-      .join("");
+      .sort(function (a, b) {
+        return rank(a.row) - rank(b.row) || a.index - b.index;
+      })
+      .map(function (entry) {
+        return entry.row;
+      });
+  }
 
-    var json = JSON.stringify(
-      {
-        probe: "simnavlog #206",
-        build: build,
-        at: new Date().toISOString(),
-        results: rows.map(function (r) {
-          return [r.group, r.name, r.value];
-        }),
-      },
-      null,
-      1
+  var ROW_PX = 24;
+  var HEADER_PX = 64;
+
+  function rowHtml(r) {
+    var cell = "padding:2px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;";
+    return (
+      '<tr style="height:' +
+      ROW_PX +
+      'px">' +
+      '<td style="' +
+      cell +
+      'color:#555">' +
+      r.group +
+      "</td>" +
+      '<td style="' +
+      cell +
+      'max-width:18em">' +
+      escapeHtml(r.name) +
+      "</td>" +
+      '<td style="' +
+      cell +
+      "max-width:24em;color:" +
+      COLOURS[r.verdict] +
+      '">' +
+      escapeHtml(r.value) +
+      "</td></tr>"
     );
+  }
 
-    container.innerHTML =
-      '<div style="font:16px/1.35 sans-serif;color:#111;background:#fbfaf6;padding:12px;height:100%;overflow:auto;box-sizing:border-box">' +
-      '<h2 style="margin:0 0 8px">SimNavLog probe <span style="font-weight:normal">build ' +
-      escapeHtml(build) +
-      "</span></h2>" +
-      '<table style="border-collapse:collapse;margin-bottom:12px">' +
-      table +
-      "</table>" +
-      '<pre style="font:12px/1.2 monospace;white-space:pre-wrap;user-select:text">' +
-      escapeHtml(json) +
-      "</pre></div>";
+  var BUTTON =
+    "display:inline-block;padding:6px 18px;margin-left:8px;background:#1e3a8a;" +
+    "color:#fff;border-radius:6px;cursor:pointer;font-weight:bold";
 
+  // The app area, live: resizing or turning the tablet updates it without a
+  // rebuild, so one run measures every size and orientation the EFB offers.
+  function areaText(container) {
+    var rect = container.getBoundingClientRect();
+    return (
+      "app area " +
+      Math.round(rect.width) +
+      " x " +
+      Math.round(rect.height) +
+      " · window " +
+      window.innerWidth +
+      " x " +
+      window.innerHeight
+    );
+  }
+
+  function render(container, build, rows) {
+    var ordered = byGroup(rows);
+    var page = 0;
+
+    function perPage() {
+      var height = container.getBoundingClientRect().height;
+      return Math.max(5, Math.floor((height - HEADER_PX) / ROW_PX));
+    }
+
+    function draw() {
+      var size = perPage();
+      var pages = Math.max(1, Math.ceil(ordered.length / size));
+      page = Math.min(page, pages - 1);
+
+      container.innerHTML =
+        '<div style="font:14px/1.3 sans-serif;color:#111;background:#fbfaf6;padding:8px 12px;' +
+        'height:100%;box-sizing:border-box;overflow:hidden">' +
+        '<div style="height:' +
+        (HEADER_PX - 16) +
+        'px;display:flex;align-items:center">' +
+        '<b style="font-size:18px">SimNavLog probe ' +
+        escapeHtml(build) +
+        "</b>" +
+        '<span id="simnavlog-probe-area" style="margin-left:16px;color:#1e3a8a">' +
+        areaText(container) +
+        "</span>" +
+        '<span style="margin-left:auto">page ' +
+        (page + 1) +
+        " / " +
+        pages +
+        "</span>" +
+        '<span id="simnavlog-probe-prev" style="' +
+        BUTTON +
+        '">&#8249; prev</span>' +
+        '<span id="simnavlog-probe-next" style="' +
+        BUTTON +
+        '">next &#8250;</span>' +
+        "</div>" +
+        '<table style="border-collapse:collapse;table-layout:fixed">' +
+        ordered
+          .slice(page * size, page * size + size)
+          .map(rowHtml)
+          .join("") +
+        "</table></div>";
+
+      document.getElementById("simnavlog-probe-prev").addEventListener("click", function () {
+        page = Math.max(0, page - 1);
+        draw();
+      });
+      document.getElementById("simnavlog-probe-next").addEventListener("click", function () {
+        page = Math.min(pages - 1, page + 1);
+        draw();
+      });
+    }
+
+    draw();
+
+    // A new size can change how many rows fit, so the pages are cut again.
+    function resized() {
+      draw();
+    }
+    if (root.ResizeObserver) {
+      new root.ResizeObserver(resized).observe(container);
+    } else {
+      root.addEventListener("resize", resized);
+    }
+
+    var json = JSON.stringify({
+      probe: "simnavlog #206",
+      build: build,
+      at: new Date().toISOString(),
+      results: rows.map(function (r) {
+        return [r.group, r.name, r.value];
+      }),
+    });
     if (root.console) console.log("SIMNAVLOG_PROBE " + json);
+  }
+
+  // Resolves once the container has a size, or after LAYOUT_WAIT_MS, with
+  // how long it waited and whether it ever got one.
+  function laidOut(container) {
+    var started = Date.now();
+    var nextFrame =
+      root.requestAnimationFrame ||
+      function (f) {
+        setTimeout(f, 50);
+      };
+
+    return new Promise(function (resolve) {
+      (function check() {
+        var rect = container.getBoundingClientRect();
+        var waited = Date.now() - started;
+        if (rect.width > 0 && rect.height > 0) return resolve({ sized: true, ms: waited });
+        if (waited > LAYOUT_WAIT_MS) return resolve({ sized: false, ms: waited });
+        nextFrame(check);
+      })();
+    });
+  }
+
+  function layoutRow(layout) {
+    return layout.sized
+      ? result("env", "waited for layout", layout.ms + " ms", "info")
+      : result(
+          "env",
+          "waited for layout",
+          "never laid out in " + layout.ms + " ms: css rows are void",
+          "missing"
+        );
   }
 
   function run(container, options) {
@@ -676,24 +815,27 @@
     container.innerHTML =
       '<div style="font:20px sans-serif;padding:12px">SimNavLog probe ' +
       escapeHtml(build) +
-      ": running…</div>";
+      ": waiting for layout…</div>";
 
-    var sync = [].concat(
-      environment(container),
-      syntaxProbes(),
-      apiProbes(),
-      cssProbes(container),
-      svgProbes(container),
-      storageProbes()
-    );
+    return laidOut(container).then(function (layout) {
+      var sync = [].concat(
+        [layoutRow(layout)],
+        environment(container),
+        syntaxProbes(),
+        apiProbes(),
+        cssProbes(container),
+        svgProbes(container),
+        storageProbes()
+      );
 
-    return Promise.all([
-      fetchProbes(),
-      fontProbes(container, opts.fontBaseUrl || "Assets/fonts"),
-    ]).then(function (settled) {
-      var rows = sync.concat(settled[0], settled[1]);
-      render(container, build, rows);
-      return rows;
+      return Promise.all([
+        fetchProbes(),
+        fontProbes(container, opts.fontBaseUrl || "Assets/fonts"),
+      ]).then(function (settled) {
+        var rows = sync.concat(settled[0], settled[1]);
+        render(container, build, rows);
+        return rows;
+      });
     });
   }
 

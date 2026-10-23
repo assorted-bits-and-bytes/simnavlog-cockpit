@@ -7,7 +7,7 @@ declare const BASE_URL: string;
 
 // Bump on every edit: the number on screen is how the edit-to-visible
 // cycle (question 4) is timed.
-const BUILD = "1";
+const BUILD = "2";
 
 declare global {
   interface Window {

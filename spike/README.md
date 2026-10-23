@@ -14,11 +14,11 @@ to the console, prefixed `SIMNAVLOG_PROBE`, if a debugger is attached anyway.
 
 ## Files
 
-| File | What |
-|---|---|
-| `probe.js` | The probe. ES5 plus Promise, so it parses on the engine it measures |
+| File         | What                                                                             |
+| ------------ | -------------------------------------------------------------------------------- |
+| `probe.js`   | The probe. ES5 plus Promise, so it parses on the engine it measures              |
 | `index.html` | The probe in an ordinary browser: the baseline to read the EFB's answers against |
-| `efb/src/` | The EFB app around it, in the shape of the SDK's TemplateApp |
+| `efb/src/`   | The EFB app around it, in the shape of the SDK's TemplateApp                     |
 
 ## Run it in the browser first
 
@@ -53,23 +53,32 @@ down the difference, because it is a finding too.
 
 ## What to record
 
-Open **SimNavLog probe** on the EFB three times:
+Build 1 (2026-10-23) answered the JS rows only. It measured before the EFB had
+laid the page out, so its container read 0 x 0 and every `css` "drawn" row is
+void. It also put the `net` and `storage` rows below the fold, where the EFB
+does not scroll. Build 2 waits for layout, puts the open questions first, and
+shows the results **a page at a time**: use **next ›** and **‹ prev**.
 
-- on the 8.3″ tablet;
-- on the 10.9″ tablet;
-- with the EFB as a 2D panel (pop-out).
+The header shows the **app area** live: the size the app is actually given,
+beside the window's. Resizing or turning the EFB updates it without
+reopening the app.
 
-A photo of each screen is enough. The `env` rows answer question 2, the `js`,
-`css`, `svg` and `font` rows answer question 3, and the `net` rows answer
-question 1.
+1. **2D panel.** Open the probe. Photograph page 1. Then cycle the EFB through
+   small, medium and large, in horizontal and vertical, and note the
+   app-area figure for each: six numbers.
+2. **VR.** Open it on the tablet and note the app-area figure: one number.
+3. **Every page** once, on any one size: a photo of each.
+4. **Restart the sim** and open the probe again: the `storage` "previous run"
+   row answers whether `localStorage` survives.
+
+How to read the rows:
 
 - **`net`, the CORS row.** Green with a byte count means the epic is on.
 - **`net`, the control row.** It should read "refused as expected". If it says
   "NOT refused", the engine does not enforce CORS. That is good news for us,
   but it changes what the CORS row proves.
-- **`storage`, "previous run".** Restart the sim and open the app again. If
-  the row shows the first run's timestamp, `localStorage` survives a restart.
-  The pairing token depends on that.
+- **`env`, "waited for layout".** A number of ms means the `css` rows measured
+  a real box. "never laid out" means they are void again.
 
 ## Question 4: time one edit
 
